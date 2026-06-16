@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>드림텔러 자동 견적서 발급 | 사자가온다(주)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+:root{
+  --brand:#1a3af5;--accent:#3d6bff;--navy:#0d1a5e;--dark:#1a2240;
+  --mid:#3a4a7a;--gray:#6a7a9a;--sky:#e8efff;--sky2:#f0f5ff;
+  --border:#cdd6f0;--green:#12a05a;--red:#d63030;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:"Noto Sans KR",sans-serif;background:#eef1f8;color:var(--dark);word-break:keep-all;line-height:1.55;}
+
+.wrap{max-width:1200px;margin:0 auto;padding:24px 20px 60px;}
+.head{text-align:center;margin-bottom:24px;padding:28px 20px;background:linear-gradient(135deg,#0d1a5e 0%,#1a3af5 100%);border-radius:14px;color:#fff;}
+.head .tag{display:inline-block;font-size:11px;font-weight:800;letter-spacing:.12em;background:rgba(255,255,255,.18);padding:5px 12px;border-radius:14px;margin-bottom:10px;}
+.head h1{font-size:28px;font-weight:900;letter-spacing:-.01em;margin-bottom:8px;}
+.head h1 em{font-style:normal;color:#ffe066;}
+.head p{font-size:13.5px;color:rgba(255,255,255,.85);}
+
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;}
+@media (max-width:900px){.grid{grid-template-columns:1fr;}}
+
+.card{background:#fff;border:1px solid var(--border);border-radius:12px;padding:22px;box-shadow:0 2px 10px rgba(13,26,94,.05);}
+.card + .card{margin-top:18px;}
+.card h2{font-size:16px;font-weight:900;color:var(--navy);margin-bottom:14px;padding-bottom:9px;border-bottom:2px solid var(--brand);display:flex;align-items:center;gap:7px;}
+.card h2 .num{width:24px;height:24px;background:var(--brand);color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;}
+
+.field{margin-bottom:14px;}
+.field:last-child{margin-bottom:0;}
+.field label{display:block;font-size:12px;font-weight:700;color:var(--navy);margin-bottom:5px;}
+.field label .req{color:var(--red);font-weight:900;}
+.field input,.field select{
+  width:100%;padding:10px 12px;border:1.5px solid var(--border);border-radius:8px;
+  font-size:13.5px;font-family:inherit;color:var(--dark);background:#fafbff;transition:.15s;
+}
+.field input:focus,.field select:focus{outline:none;border-color:var(--brand);background:#fff;box-shadow:0 0 0 3px rgba(26,58,245,.1);}
+.field .hint{font-size:11px;color:var(--gray);margin-top:4px;}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+
+/* Selectable card grid — used by both plans and options */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;}
+.cards label{position:relative;border:1.5px solid var(--border);border-radius:8px;padding:9px;
+  cursor:pointer;background:#fafbff;transition:.15s;text-align:center;}
+.cards label input{position:absolute;opacity:0;width:0;height:0;pointer-events:none;}
+.cards label .l{font-size:11.5px;font-weight:700;color:var(--mid);margin-bottom:3px;}
+.cards label .p{font-size:12.5px;font-weight:800;color:var(--navy);}
+.cards label .p.free{color:var(--green);}
+.cards label:hover{border-color:var(--accent);background:#fff;}
+.cards label:has(input:checked){border-color:var(--brand);background:linear-gradient(135deg,#f0f5ff,#e8efff);box-shadow:0 0 0 2px rgba(26,58,245,.15);}
+.cards label:has(input:checked) .l{color:var(--brand);}
+
+.opt-grp{margin-bottom:14px;}
+.opt-grp:last-child{margin-bottom:0;}
+.opt-grp .gt{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:6px;}
+
+.maint{display:none;margin-bottom:14px;padding:11px 13px;background:#fff8e0;border:1px solid #e8d99a;border-radius:8px;}
+.maint.show{display:block;}
+.maint .ttl{font-size:11.5px;font-weight:800;color:#e8a800;margin-bottom:6px;}
+
+/* Quote preview */
+.qp{background:linear-gradient(135deg,#fafbff 0%,#f0f5ff 100%);border:1.5px solid var(--sky);border-radius:12px;padding:18px 20px;}
+.qp-title{font-size:13px;font-weight:800;color:var(--brand);letter-spacing:.06em;margin-bottom:12px;text-transform:uppercase;}
+.qp-sec{margin-top:6px;font-size:10.5px;font-weight:800;color:var(--accent);letter-spacing:.04em;text-transform:uppercase;padding:4px 0 2px;}
+.qp-line{display:flex;justify-content:space-between;align-items:baseline;padding:6px 0;border-bottom:1px dashed rgba(26,58,245,.12);font-size:12.5px;}
+.qp-line.sub{font-size:11.5px;color:var(--gray);padding:3px 0 3px 10px;border:none;}
+.qp-line .l{color:var(--mid);}
+.qp-line .v{font-weight:700;color:var(--navy);font-variant-numeric:tabular-nums;}
+.qp-line.sub .v{font-weight:500;color:var(--mid);}
+.qp-total{margin-top:12px;padding-top:14px;border-top:2.5px solid var(--brand);display:flex;justify-content:space-between;align-items:baseline;}
+.qp-total .l{font-size:13px;font-weight:900;color:var(--navy);}
+.qp-total .v{font-size:22px;font-weight:900;color:var(--brand);font-variant-numeric:tabular-nums;}
+.qp-total .v small{font-size:12px;font-weight:700;}
+.qp-note{margin-top:10px;font-size:10.5px;color:var(--gray);text-align:right;}
+
+.actions{margin-top:20px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap;}
+.btn{padding:14px 32px;border-radius:10px;font-size:14px;font-weight:800;font-family:inherit;
+  cursor:pointer;border:none;transition:.15s;text-decoration:none;display:inline-block;}
+.btn-primary{background:linear-gradient(135deg,#1a3af5,#3d6bff);color:#fff;box-shadow:0 4px 14px rgba(26,58,245,.35);}
+.btn-primary:hover{transform:translateY(-1px);box-shadow:0 6px 18px rgba(26,58,245,.45);}
+.btn-primary:disabled{background:#aab;cursor:wait;box-shadow:none;transform:none;}
+.btn-back{background:#fff;color:var(--navy);border:1.5px solid var(--border);}
+.btn-back:hover{background:var(--sky2);}
+
+.notice{margin-top:14px;padding:11px 14px;background:#fff8e0;border:1px solid #e8d99a;
+  border-radius:8px;font-size:11.5px;color:var(--navy);line-height:1.6;}
+.notice strong{color:var(--brand);}
+
+.status{margin-top:14px;padding:11px 14px;border-radius:8px;font-size:12.5px;
+  font-weight:700;display:none;white-space:pre-line;line-height:1.6;}
+.status.ok{display:block;background:#dcfce7;color:#15803d;border:1px solid #86efac;}
+.status.err{display:block;background:#fee2e2;color:#991b1b;border:1px solid #fca5a5;}
+.status.loading{display:block;background:var(--sky2);color:var(--brand);border:1px solid var(--border);}
+
+/* PDF template — clipped to 0×0 so it's truly invisible, child keeps its A4 layout */
+.pdf-stage{position:fixed;top:0;left:0;width:0;height:0;overflow:hidden;pointer-events:none;}
+.pdf-page{width:210mm;height:297mm;padding:14mm 14mm;background:#fff;
+  font-family:"Noto Sans KR",sans-serif;color:#1a2240;box-sizing:border-box;
+  display:flex;flex-direction:column;overflow:hidden;}
+.pdf-head{display:flex;justify-content:space-between;align-items:flex-start;
+  border-bottom:2.5px solid #1a3af5;padding-bottom:10px;margin-bottom:12px;flex-shrink:0;}
+.pdf-head-left .pdf-tag{font-size:10px;font-weight:800;color:#3d6bff;letter-spacing:.12em;
+  text-transform:uppercase;margin-bottom:3px;}
+.pdf-head-left h1{font-size:24px;font-weight:900;color:#0d1a5e;letter-spacing:.04em;line-height:1.1;}
+.pdf-head-right{text-align:right;font-size:10px;color:#6a7a9a;line-height:1.7;}
+.pdf-head-right strong{color:#0d1a5e;font-size:11.5px;}
+.pdf-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;flex-shrink:0;}
+.pdf-meta-box{background:#fafbff;border:1px solid #cdd6f0;border-radius:7px;padding:9px 12px;}
+.pdf-meta-box h3{font-size:9.5px;font-weight:800;color:#3d6bff;letter-spacing:.1em;
+  margin-bottom:5px;text-transform:uppercase;}
+.pdf-meta-box .mrow{display:flex;font-size:11px;padding:2px 0;}
+.pdf-meta-box .ml{width:58px;color:#6a7a9a;font-weight:600;}
+.pdf-meta-box .mv{flex:1;color:#0d1a5e;font-weight:700;}
+.pdf-total-box{background:linear-gradient(135deg,#0d1a5e,#1a3af5);color:#fff;border-radius:9px;
+  padding:13px 18px;margin-bottom:12px;display:flex;justify-content:space-between;
+  align-items:center;flex-shrink:0;}
+.pdf-total-box .pl{font-size:12px;font-weight:700;letter-spacing:.04em;}
+.pdf-total-box .pv{font-size:24px;font-weight:900;}
+.pdf-table-wrap{flex-shrink:0;margin-bottom:12px;}
+.pdf-table{width:100%;border-collapse:collapse;font-size:11px;}
+.pdf-table thead{background:#0d1a5e;color:#fff;}
+.pdf-table th{padding:7px 9px;text-align:left;font-weight:700;font-size:10.5px;letter-spacing:.04em;}
+.pdf-table th.right{text-align:right;}
+.pdf-table td{padding:6px 9px;border-bottom:1px solid #e8efff;}
+.pdf-table td.right{text-align:right;font-variant-numeric:tabular-nums;}
+.pdf-table tr.sub td{color:#6a7a9a;font-size:10px;padding:2px 9px 2px 22px;border-bottom:none;}
+.pdf-table tr.section td{background:#f0f5ff;font-weight:800;color:#1a3af5;font-size:10px;
+  letter-spacing:.04em;text-transform:uppercase;padding:5px 9px;}
+.pdf-table tr.total td{background:#fafbff;font-weight:900;color:#0d1a5e;
+  border-top:2px solid #1a3af5;font-size:12.5px;padding:9px;}
+.pdf-note{font-size:9.5px;color:#6a7a9a;line-height:1.65;padding:9px 12px;background:#fafbff;
+  border-left:3px solid #1a3af5;border-radius:0 6px 6px 0;flex-shrink:0;}
+.pdf-note strong{color:#0d1a5e;font-size:10.5px;}
+.pdf-foot{font-size:9px;color:#6a7a9a;border-top:1px solid #cdd6f0;padding-top:7px;
+  display:flex;justify-content:space-between;flex-shrink:0;margin-top:auto;}
+.pdf-foot strong{color:#0d1a5e;}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header class="head">
+    <span class="tag">AUTO QUOTE · 자동 견적서 발급</span>
+    <h1><em>드림텔러</em> 자동 견적서 발급</h1>
+    <p>운영 조건과 옵션을 선택하시면 견적서를 즉시 PDF로 발급해 드립니다.</p>
+  </header>
+
+  <form id="quoteForm" class="grid" novalidate>
+    <div>
+      <div class="card">
+        <h2><span class="num">1</span>수신자 정보</h2>
+        <div class="field">
+          <label>수신자 성함 <span class="req">*</span></label>
+          <input type="text" name="name" placeholder="예: 홍길동" autocomplete="name" required>
+        </div>
+        <div class="field">
+          <label>기관/회사명 <span class="req">*</span></label>
+          <input type="text" name="org" placeholder="예: ○○고등학교 / ○○주식회사" autocomplete="organization" required>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label>이메일 <span class="req">*</span></label>
+            <input type="email" name="email" placeholder="example@school.kr" autocomplete="email" required>
+          </div>
+          <div class="field">
+            <label>연락처 (선택)</label>
+            <input type="tel" name="phone" placeholder="010-0000-0000" autocomplete="tel">
+          </div>
+        </div>
+        <div class="field">
+          <label>비고 (선택)</label>
+          <input type="text" name="memo" placeholder="행사명, 설치 예정일 등 추가 요청사항">
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">2</span>렌탈 기간 · 수량</h2>
+        <div class="field">
+          <label>운영 기간 <span class="req">*</span></label>
+          <div class="cards" id="planGrid"></div>
+          <div class="hint">단기 행사형 1일~2주 / 장기 운영형 1~3개월 / 3개월 이후는 유지보수 전환(월 46.2만원)</div>
+        </div>
+        <div class="maint" id="maintBox">
+          <div class="ttl">📊 유지보수 추가 개월수</div>
+          <div class="field">
+            <input type="number" name="maint" min="0" max="36" value="3">
+            <div class="hint">초기 3개월 패키지 이후 추가 운영 개월수 (월 462,000원)</div>
+          </div>
+        </div>
+        <div class="row2">
+          <div class="field">
+            <label>수량 (대)</label>
+            <input type="number" name="qty" min="1" max="20" value="1">
+          </div>
+          <div class="field">
+            <label>배송 지역</label>
+            <select name="region">
+              <option value="seoul">서울·인천 (왕복 110,000원)</option>
+              <option value="gg">경기 (왕복 165,000원)</option>
+              <option value="etc">그 외 지역 (왕복 220,000원)</option>
+            </select>
+          </div>
+        </div>
+        <div class="field" style="margin-top:14px;margin-bottom:0;">
+          <label>설치 예정일 (선택)</label>
+          <input type="date" name="installDate">
+          <div class="hint">희망 설치일이 있으시면 입력해 주세요. 일정 협의를 위한 참고용입니다.</div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2><span class="num">3</span>커스텀 옵션 (선택)</h2>
+        <div id="optionsBox"></div>
+      </div>
+    </div>
+
+    <div>
+      <div class="card" style="position:sticky;top:20px;">
+        <h2><span class="num">4</span>견적 미리보기</h2>
+
+        <div class="qp">
+          <div class="qp-title">📋 견적 산출 내역 (VAT 포함)</div>
+          <div id="qpLines"></div>
+          <div class="qp-total">
+            <span class="l">총 견적 금액</span>
+            <span class="v"><span id="qpTotal">0</span><small> 원</small></span>
+          </div>
+          <div class="qp-note">※ 본 견적은 자동 산출 결과이며 실제 계약 조건에 따라 조정될 수 있습니다.</div>
+        </div>
+
+        <div class="notice">
+          <strong>📄 안내</strong> · 발급 버튼을 누르시면 PDF 견적서가 다운로드되며, 입력하신 정보가 사자가온다(주) 담당자에게 자동 전달됩니다.
+        </div>
+
+        <div class="actions">
+          <a href="index.html" class="btn btn-back">← 제안서로 돌아가기</a>
+          <button type="submit" class="btn btn-primary" id="genBtn">📄 견적서 발급 (PDF)</button>
+        </div>
+
+        <div class="status" id="statusBox"></div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<!-- PDF template (offscreen) -->
+<div class="pdf-stage" aria-hidden="true">
+<div id="pdfTpl" class="pdf-page">
+  <div class="pdf-head">
+    <div class="pdf-head-left">
+      <div class="pdf-tag">QUOTATION · 견적서</div>
+      <h1>견 적 서</h1>
+    </div>
+    <div class="pdf-head-right">
+      <div><strong>사자가온다(주)</strong></div>
+      <div>본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호</div>
+      <div>지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호</div>
+      <div>TEL 070-0749-0105 · info@sjgod.kr</div>
+    </div>
+  </div>
+
+  <div class="pdf-meta">
+    <div class="pdf-meta-box">
+      <h3>📥 수신처</h3>
+      <div class="mrow"><span class="ml">수신자</span><span class="mv" data-pdf="name">-</span></div>
+      <div class="mrow"><span class="ml">기관/회사</span><span class="mv" data-pdf="org">-</span></div>
+      <div class="mrow"><span class="ml">이메일</span><span class="mv" data-pdf="email">-</span></div>
+      <div class="mrow"><span class="ml">연락처</span><span class="mv" data-pdf="phone">-</span></div>
+    </div>
+    <div class="pdf-meta-box">
+      <h3>📄 견적 정보</h3>
+      <div class="mrow"><span class="ml">견적번호</span><span class="mv" data-pdf="qno">-</span></div>
+      <div class="mrow"><span class="ml">발행일</span><span class="mv" data-pdf="date">-</span></div>
+      <div class="mrow"><span class="ml">유효기간</span><span class="mv" data-pdf="valid">-</span></div>
+      <div class="mrow"><span class="ml">설치 예정일</span><span class="mv" data-pdf="installDate">-</span></div>
+      <div class="mrow"><span class="ml">결제조건</span><span class="mv">계약 시 협의</span></div>
+    </div>
+  </div>
+
+  <div class="pdf-total-box">
+    <span class="pl">총 견적 금액 (VAT 포함)</span>
+    <span class="pv"><span data-pdf="total">0</span> 원</span>
+  </div>
+
+  <div class="pdf-table-wrap">
+    <table class="pdf-table">
+      <thead>
+        <tr>
+          <th style="width:60%;">항목</th>
+          <th style="width:15%;">수량</th>
+          <th class="right" style="width:25%;">금액 (원)</th>
+        </tr>
+      </thead>
+      <tbody id="pdfRows"></tbody>
+    </table>
+  </div>
+
+  <div class="pdf-note">
+    <strong>📌 견적 안내</strong><br>
+    · 본 견적서는 자동 산출된 기준 견적이며, 현장 조건·옵션 변경에 따라 조정될 수 있습니다.<br>
+    · 모든 금액은 부가가치세(VAT 10%)가 포함된 금액입니다.<br>
+    · 설치/철거비는 무료이며, 왕복 배송료만 별도 청구됩니다.<br>
+    · 운영 시간 기준: 1일 기준 오전 10시 설치 ~ 오후 6시 철거<br>
+    · 계약 진행 시 세부 사양 및 일정은 별도 협의 후 확정됩니다.
+  </div>
+
+  <div class="pdf-foot">
+    <span><strong>사자가온다(주)</strong> · www.sjgod.kr</span>
+    <span>DREAM TELLER · AI 기반 미래 직업 체험 포토부스</span>
+  </div>
+</div>
+</div>
+
+<script>
+'use strict';
+
+/* ───── Config ─────────────────────────────────────────── */
+const WEB3FORMS_KEY = '9765b444-6f6e-4afd-9970-7fb253e2d173';
+const NOTIFY_EMAIL  = 'sajagaonda@gmail.com';
+
+const PLANS = [
+  {key:'d1',  name:'1일',           price:935000},
+  {key:'w1',  name:'1주',           price:2310000},
+  {key:'w2',  name:'2주',           price:3080000},
+  {key:'m1',  name:'1개월',         price:4620000},
+  {key:'m2',  name:'2개월',         price:6160000},
+  {key:'m3',  name:'3개월',         price:7700000},
+  {key:'mnt', name:'3개월+유지보수', price:7700000, maint:true}
+];
+
+const SHIPPING = {
+  seoul:{label:'서울·인천', price:110000},
+  gg:   {label:'경기',       price:165000},
+  etc:  {label:'그 외 지역', price:220000}
+};
+
+const MAINT_MONTHLY = 462000;
+
+/* All custom options share the same shape: 3 choices each, first is free */
+const OPTIONS = [
+  {key:'ui',   group:'🎨 UI 디자인 변경', choices:[
+    {v:0,     label:'기본 디자인', desc:'무료',     pdfLabel:null},
+    {v:11000, label:'로고 추가',   desc:'11,000원', pdfLabel:'UI 로고 추가'},
+    {v:55000, label:'맞춤 디자인', desc:'55,000원', pdfLabel:'UI 맞춤 디자인'}
+  ]},
+  {key:'q', group:'💬 질문 변경 / 추가', choices:[
+    {v:0,     label:'기본 질문 9개', desc:'무료',        pdfLabel:null},
+    {v:5500,  label:'텍스트 수정',   desc:'5,500원',     pdfLabel:'질문 텍스트 수정'},
+    {v:11000, label:'질문 추가',     desc:'11,000원/개', pdfLabel:'질문 추가'}
+  ]},
+  {key:'wrap', group:'📦 부스 랩핑', choices:[
+    {v:0,      label:'없음',      desc:'무료',      pdfLabel:null},
+    {v:55000,  label:'1면당',     desc:'55,000원',  pdfLabel:'부스 랩핑 (1면)'},
+    {v:247500, label:'전체 랩핑', desc:'247,500원', pdfLabel:'부스 랩핑 (전체)'}
+  ]}
+];
+
+/* ───── DOM refs ───────────────────────────────────────── */
+const form     = document.getElementById('quoteForm');
+const planGrid = document.getElementById('planGrid');
+const optsBox  = document.getElementById('optionsBox');
+const maintBox = document.getElementById('maintBox');
+const qpLines  = document.getElementById('qpLines');
+const qpTotal  = document.getElementById('qpTotal');
+const statusEl = document.getElementById('statusBox');
+const genBtn   = document.getElementById('genBtn');
+const pdfTpl   = document.getElementById('pdfTpl');
+const pdfRows  = document.getElementById('pdfRows');
+const $pdf     = key => pdfTpl.querySelector(`[data-pdf="${key}"]`);
+
+/* ───── Helpers ────────────────────────────────────────── */
+const won = n => n.toLocaleString('ko-KR');
+const fmtDate = d => `${d.getFullYear()}년 ${d.getMonth()+1}월 ${d.getDate()}일`;
+const fmtInputDate = s => {
+  if(!s) return '-';
+  const [y,m,d] = s.split('-');
+  return `${y}년 ${parseInt(m,10)}월 ${parseInt(d,10)}일`;
+};
+const toInputDate = d => `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
+
+/* 설치 예정일은 내일부터 선택 가능 (오늘·과거 차단) */
+(() => {
+  const tomorrow = new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+  form.elements.installDate.min = toInputDate(tomorrow);
+})();
+
+/* ───── Render plan + option cards from data ──────────── */
+planGrid.innerHTML = PLANS.map((p,i) => `
+  <label>
+    <input type="radio" name="plan" value="${p.key}" ${i===0?'checked':''}>
+    <div class="l">${p.name}</div>
+    <div class="p">${(p.price/10000).toLocaleString()}<small>만원~</small></div>
+  </label>
+`).join('');
+
+optsBox.innerHTML = OPTIONS.map(opt => `
+  <div class="opt-grp">
+    <div class="gt">${opt.group}</div>
+    <div class="cards">
+      ${opt.choices.map((c,i) => `
+        <label>
+          <input type="radio" name="${opt.key}" value="${c.v}" ${i===0?'checked':''}>
+          <div class="l">${c.label}</div>
+          <div class="p${c.v===0?' free':''}">${c.desc}</div>
+        </label>
+      `).join('')}
+    </div>
+  </div>
+`).join('');
+
+/* ───── Read form state ────────────────────────────────── */
+function readState(){
+  const fd = new FormData(form);
+  const num = (k, min=0) => Math.max(min, parseInt(fd.get(k),10) || min);
+  return {
+    plan:   fd.get('plan'),
+    qty:    num('qty', 1),
+    region: fd.get('region'),
+    maint:  num('maint', 0),
+    ui:     num('ui'),
+    q:      num('q'),
+    wrap:   num('wrap')
+  };
+}
+
+/* ───── Calculate ──────────────────────────────────────── */
+function calc(s){
+  const plan = PLANS.find(p => p.key === s.plan);
+  const ship = SHIPPING[s.region];
+  const lines = [];
+
+  // 본체 렌탈
+  lines.push({
+    section:'본체 렌탈',
+    label:`드림텔러 렌탈 (${plan.name})`,
+    sub: s.qty>1 ? `${won(plan.price)}원 × ${s.qty}대` : null,
+    qty:`${s.qty}대`,
+    amount: plan.price * s.qty
+  });
+
+  // 유지보수 (mnt 플랜 + 추가 개월수가 있을 때만)
+  if(plan.maint && s.maint > 0){
+    lines.push({
+      label:'유지보수 (4개월차~)',
+      sub:`월 ${won(MAINT_MONTHLY)}원 × ${s.maint}개월${s.qty>1?` × ${s.qty}대`:''}`,
+      qty:`${s.maint}개월`,
+      amount: MAINT_MONTHLY * s.maint * s.qty
+    });
+  }
+
+  // 배송료
+  lines.push({
+    section:'배송',
+    label:`왕복 배송료 (${ship.label})`,
+    sub: s.qty>1 ? `${won(ship.price)}원 × ${s.qty}대` : null,
+    qty:`${s.qty}대`,
+    amount: ship.price * s.qty
+  });
+
+  // 커스텀 옵션 (선택된 것만)
+  let secShown = false;
+  for(const opt of OPTIONS){
+    const v = s[opt.key];
+    if(!v) continue;
+    const c = opt.choices.find(x => x.v === v);
+    lines.push({
+      section: secShown ? null : '커스텀 옵션',
+      label: c.pdfLabel,
+      sub: s.qty>1 ? `${won(v)}원 × ${s.qty}대` : null,
+      qty:`${s.qty}대`,
+      amount: v * s.qty
+    });
+    secShown = true;
+  }
+
+  const total = lines.reduce((sum, l) => sum + l.amount, 0);
+  return {plan, lines, total};
+}
+
+/* ───── Build line rows (shared by preview + PDF) ─────── */
+function renderLines(lines, fmt){
+  let html = '';
+  let prevSec = null;
+  for(const ln of lines){
+    if(ln.section && ln.section !== prevSec){
+      html += fmt.sec(ln.section);
+      prevSec = ln.section;
+    }
+    html += fmt.line(ln);
+    if(ln.sub) html += fmt.sub(ln);
+  }
+  return html;
+}
+
+const PREVIEW_FMT = {
+  sec:  s  => `<div class="qp-sec">${s}</div>`,
+  line: ln => `<div class="qp-line"><span class="l">${ln.label}</span><span class="v">${won(ln.amount)}원</span></div>`,
+  sub:  ln => `<div class="qp-line sub"><span class="l">${ln.sub}</span><span class="v"></span></div>`
+};
+
+const PDF_FMT = {
+  sec:  s  => `<tr class="section"><td colspan="3">${s}</td></tr>`,
+  line: ln => `<tr><td>${ln.label}</td><td>${ln.qty}</td><td class="right">${won(ln.amount)}</td></tr>`,
+  sub:  ln => `<tr class="sub"><td colspan="3">└ ${ln.sub}</td></tr>`
+};
+
+/* ───── Update preview on any form change ─────────────── */
+function update(){
+  const s = readState();
+  const {lines, total} = calc(s);
+  maintBox.classList.toggle('show', s.plan === 'mnt');
+  qpLines.innerHTML = renderLines(lines, PREVIEW_FMT);
+  qpTotal.textContent = won(total);
+}
+form.addEventListener('change', update);
+form.addEventListener('input', e => {
+  if(e.target.name === 'qty' || e.target.name === 'maint') update();
+});
+update();
+
+/* ───── Status helper (always scrolls into view) ──────── */
+function setStatus(type, msg){
+  statusEl.className = 'status ' + type;
+  statusEl.textContent = msg;
+  statusEl.scrollIntoView({behavior:'smooth', block:'center'});
+}
+
+/* ───── Quote number ──────────────────────────────────── */
+function genQuoteNo(){
+  const d = new Date();
+  const dt = `${d.getFullYear()}${String(d.getMonth()+1).padStart(2,'0')}${String(d.getDate()).padStart(2,'0')}`;
+  const rnd = Math.random().toString(36).slice(2,6).toUpperCase();
+  return `Q${dt}-${rnd}`;
+}
+
+/* ───── Fill PDF template ─────────────────────────────── */
+function fillPdf(data, result, qno){
+  const today = new Date();
+  const valid = new Date(today.getTime() + 30*24*3600*1000);
+  $pdf('name').textContent  = data.name;
+  $pdf('org').textContent   = data.org;
+  $pdf('email').textContent = data.email;
+  $pdf('phone').textContent = data.phone || '-';
+  $pdf('qno').textContent         = qno;
+  $pdf('date').textContent        = fmtDate(today);
+  $pdf('valid').textContent       = `${fmtDate(valid)} 까지`;
+  $pdf('installDate').textContent = fmtInputDate(data.installDate);
+  $pdf('total').textContent       = won(result.total);
+
+  const rows = renderLines(result.lines, PDF_FMT)
+    + `<tr class="total"><td>합계 (VAT 포함)</td><td></td><td class="right">${won(result.total)} 원</td></tr>`;
+  pdfRows.innerHTML = rows;
+}
+
+/* ───── Notify owner via Web3Forms ────────────────────── */
+async function notifyOwner(data, result, qno, state){
+  if(!WEB3FORMS_KEY || WEB3FORMS_KEY.startsWith('YOUR_')){
+    return {skipped:true};
+  }
+  const plan = result.plan;
+  const optLabel = key => {
+    const opt = OPTIONS.find(o => o.key === key);
+    return opt.choices.find(c => c.v === state[key]).label;
+  };
+  const body = {
+    access_key: WEB3FORMS_KEY,
+    subject: `[드림텔러 자동견적] ${data.org} / ${data.name} · ${won(result.total)}원`,
+    from_name: '드림텔러 자동견적 시스템',
+    to_email: NOTIFY_EMAIL,
+    견적번호: qno,
+    수신자: data.name,
+    기관: data.org,
+    이메일: data.email,
+    연락처: data.phone || '-',
+    설치예정일: fmtInputDate(data.installDate),
+    비고: data.memo || '-',
+    운영기간: plan.name,
+    수량: `${state.qty}대`,
+    배송지역: SHIPPING[state.region].label,
+    UI옵션: optLabel('ui'),
+    질문옵션: optLabel('q'),
+    랩핑옵션: optLabel('wrap'),
+    유지보수개월: plan.maint ? `${state.maint}개월` : '-',
+    총견적금액: `${won(result.total)}원`,
+    발급일시: new Date().toLocaleString('ko-KR')
+  };
+  try{
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method:'POST',
+      headers:{'Content-Type':'application/json', 'Accept':'application/json'},
+      body: JSON.stringify(body)
+    });
+    return await res.json();
+  }catch(err){
+    console.error('[Notify] failed:', err);
+    return {success:false, error:err.message};
+  }
+}
+
+/* ───── Main submit handler ──────────────────────────── */
+form.addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  if(!form.checkValidity()){ form.reportValidity(); return; }
+  if(typeof html2canvas === 'undefined' || !window.jspdf){
+    setStatus('err', '⚠ PDF 라이브러리 로드에 실패했습니다. 인터넷 연결을 확인 후 페이지를 새로고침해 주세요.');
+    return;
+  }
+
+  const fd = new FormData(form);
+  const data = {
+    name:        fd.get('name').trim(),
+    org:         fd.get('org').trim(),
+    email:       fd.get('email').trim(),
+    phone:       fd.get('phone').trim(),
+    memo:        fd.get('memo').trim(),
+    installDate: fd.get('installDate') || ''
+  };
+  const state = readState();
+  const result = calc(state);
+  const qno = genQuoteNo();
+
+  genBtn.disabled = true;
+  setStatus('loading', '⏳ 견적서 생성 중...');
+  fillPdf(data, result, qno);
+
+  // 폰트 로드 + 두 프레임 대기 (캔버스 렌더 안정화)
+  try{ if(document.fonts?.ready) await document.fonts.ready; }catch(_){}
+  await new Promise(r => requestAnimationFrame(() => requestAnimationFrame(r)));
+
+  const safeOrg = data.org.replace(/[\\\/:*?"<>|]/g, '_');
+  const fileName = `드림텔러_견적서_${safeOrg}_${qno}.pdf`;
+
+  try{
+    // html2canvas + jsPDF 직접 호출 — A4 1페이지 강제
+    const canvas = await html2canvas(pdfTpl, {
+      scale: 2,
+      useCORS: true,
+      backgroundColor: '#ffffff',
+      logging: false,
+      width: 794,      // 210mm @ 96dpi
+      height: 1123     // 297mm @ 96dpi
+    });
+    const {jsPDF} = window.jspdf;
+    const pdf = new jsPDF({orientation:'portrait', unit:'mm', format:'a4', compress:true});
+    pdf.addImage(canvas.toDataURL('image/jpeg', 0.98), 'JPEG', 0, 0, 210, 297);
+    pdf.save(fileName);
+  }catch(err){
+    console.error('[PDF] failed:', err);
+    setStatus('err', `⚠ PDF 생성 실패: ${err.message || err}`);
+    genBtn.disabled = false;
+    return;
+  }
+
+  const notify = await notifyOwner(data, result, qno, state);
+  const base = `✓ 견적서가 다운로드되었습니다. (견적번호: ${qno})`;
+  if(notify.success){
+    setStatus('ok', `${base}\n담당자에게 발급 알림이 전송되었습니다.`);
+  } else if(notify.skipped){
+    setStatus('ok', `${base}\n※ 알림 이메일 미설정 — sajagaonda@gmail.com 으로 직접 문의 부탁드립니다.`);
+  } else {
+    setStatus('ok', `${base}\n※ 담당자 알림 전송에 일시적 오류가 발생했습니다.`);
+  }
+  genBtn.disabled = false;
+});
+</script>
+</body>
+</html>
