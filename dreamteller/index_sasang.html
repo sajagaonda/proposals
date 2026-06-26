@@ -1,0 +1,885 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@latest/dist/web/static/pretendard.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>드림텔러 포토부스 제안서 | 사자가온다(주)</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --brand:#1a3af5;--accent:#2A4BE0;--navy:#0A1A6B;--dark:#1a2240;
+  --mid:#3a4a7a;--gray:#6a7a9a;--sky:#e8efff;--sky2:#f0f5ff;
+  --white:#fff;--border:#cdd6f0;
+  --gold:#e8a800;--goldbg:#fff8e0;--goldborder:#e8c870;--goldtext:#7a5b00;--goldlight:#f5d36b;
+  --green:#12a05a;--red:#d63030;--cyan:#0098c8;--cyanbg:#e6f6fc;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{font-family:'Pretendard','Pretendard Variable','Apple SD Gothic Neo','Malgun Gothic','Noto Sans KR',sans-serif;background:#c0cae0;color:var(--dark);word-break:keep-all;}
+
+.page{width:297mm;min-height:210mm;background:var(--white);margin:0 auto 12px;position:relative;overflow:hidden;page-break-after:always;display:flex;flex-direction:column;}
+
+/* COVER */
+.cover{background:linear-gradient(140deg,#06102e 0%,#1a3af5 52%,#14307E 100%);min-height:210mm;display:flex;flex-direction:column;}
+.cover-body{display:flex;flex:1;}
+.cover-left{flex:.85;padding:26px 12px 18px 36px;display:flex;flex-direction:column;justify-content:center;}
+.cover-right{flex:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 18px 16px 0;gap:9px;}
+.cover-logo{width:360px;mix-blend-mode:screen;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5));margin-bottom:18px;}
+.recv{display:inline-flex;align-items:center;gap:11px;background:#fff;border-radius:12px;padding:9px 15px;align-self:flex-start;margin-bottom:20px;box-shadow:0 6px 20px rgba(0,0,0,.28);max-width:368px;}.recv-logo{max-height:34px;max-width:88px;width:auto;height:auto;object-fit:contain;display:block;flex:none;}.recv-name{color:#0d1a5e;font-size:13px;font-weight:700;letter-spacing:-0.3px;line-height:1.35;}.recv-name b{color:#1a3af5;font-weight:900;}.co-sub{font-size:43px;font-weight:900;color:rgba(255,255,255,.97);margin-bottom:16px;letter-spacing:-0.5px;line-height:1.15;}
+.co-desc{font-size:13px;line-height:1.9;color:rgba(255,255,255,.82);max-width:305px;margin-bottom:18px;}
+.co-desc strong{color:var(--goldlight);}
+.co-pills{display:flex;gap:6px;flex-wrap:wrap;}
+.co-pill{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:20px;padding:5px 13px;font-size:12px;font-weight:600;color:#fff;}
+.cover-stack{position:relative;width:100%;height:430px;padding:18px 12px;}
+.cover-stack img{position:absolute;width:75%;border-radius:14px;border:3px solid rgba(255,255,255,.35);box-shadow:0 8px 22px rgba(0,0,0,.4);object-fit:cover;background:transparent;}
+.cover-stack .cs1{top:18px;left:0;transform:rotate(-4deg);height:330px;z-index:1;}
+.cover-stack .cs2{bottom:18px;right:0;transform:rotate(4deg);height:330px;z-index:2;}
+.cover-bottom{background:rgba(0,0,0,.3);padding:9px 36px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.cbi{font-size:9px;color:rgba(255,255,255,.6);line-height:1.75;}
+.cbi strong{color:rgba(255,255,255,.9);}
+.cup{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);border-radius:5px;padding:4px 12px;font-size:9px;font-weight:700;color:#fff;letter-spacing:.06em;}
+
+/* INNER */
+.inner{flex:1;min-height:0;padding:13px 28px 9px;display:flex;flex-direction:column;gap:6px;}
+.ph-bar{display:flex;align-items:center;gap:11px;}
+.ph-text{flex:1;min-width:0;}
+.ph-tag{background:var(--sky2);color:var(--brand);border:1px solid rgba(26,58,245,.25);font-size:10px;font-weight:800;padding:4px 10px;border-radius:14px;letter-spacing:.04em;flex-shrink:0;}
+.ph-num{width:34px;height:34px;border-radius:50%;background:var(--brand);color:#fff;font-size:15px;font-weight:900;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.ph-section{font-size:9.5px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;}
+.ph-title{font-size:20px;font-weight:900;color:var(--navy);line-height:1.15;}
+.ph-title em{font-style:normal;color:var(--brand);} .prob-main{display:flex;gap:14px;align-items:flex-start;} .prob-left{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px;justify-content:space-between;} .ph-demo{display:flex;gap:9px;flex:none;} .ph-demo figure{margin:0;display:flex;flex-direction:column;align-items:center;} .ph-demo .gifwrap{position:relative;display:flex;} .ph-demo img{height:320px;width:auto;border-radius:10px;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(13,26,94,.22);display:block;background:#0d1a5e;} .ph-demo figcaption{font-size:10px;font-weight:800;color:var(--accent);margin-top:5px;letter-spacing:.02em;white-space:nowrap;} .ph-demo .dt-badge{position:absolute;top:6px;left:6px;z-index:2;background:rgba(13,26,94,.85);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:.04em;} .ph-demo figure{position:relative;}
+
+/* FOOTER */
+.pf{background:var(--navy);padding:6px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
+.pf-info{font-size:7.5px;color:rgba(255,255,255,.45);}
+.pf-info strong{color:rgba(255,255,255,.8);}
+.pf-right{display:flex;align-items:center;gap:9px;}
+.pf-brand{font-size:8px;font-weight:700;color:rgba(255,255,255,.5);}
+.pf-pg{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.2);border-radius:4px;padding:2px 9px;font-size:9px;font-weight:700;color:#fff;}
+
+/* SECTION DIV */
+.sdiv{font-size:12.5px;font-weight:800;color:var(--navy);padding-bottom:5px;border-bottom:2.5px solid var(--border);}
+.sdiv.t{border-color:var(--accent);color:var(--brand);}
+.sdiv.s{border-color:var(--cyan);color:var(--cyan);}
+.sdiv.u{border-color:var(--gold);color:var(--gold);}
+
+/* PAIN / USE-CASE CARDS */
+.pg3{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;}
+.pg4{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;}
+.pg6{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;}
+.pc{background:var(--sky2);border:1.5px solid var(--border);border-radius:10px;padding:11px 13px;}
+.pc.sc{background:var(--cyanbg);border-color:rgba(0,152,200,.2);}
+.pc.uc{background:var(--goldbg);border-color:rgba(232,168,0,.3);padding:10px 11px;text-align:center;}
+.pc .who{font-size:11px;font-weight:800;color:var(--brand);margin-bottom:4px;}
+.pc.sc .who{color:var(--cyan);}
+.pc p{font-size:11.5px;line-height:1.65;color:var(--dark);}
+.pc.uc p{font-size:11px;font-weight:700;color:var(--navy);line-height:1.45;}
+
+/* COMPANY INTRO */
+.intro-box{background:linear-gradient(135deg,var(--navy) 0%,var(--brand) 100%);border-radius:12px;padding:9px 18px;color:#fff;margin-top:auto;}
+.intro-head{display:flex;align-items:center;gap:14px;margin-bottom:6px;}
+.intro-logo{width:54px;height:54px;object-fit:contain;filter:invert(1) drop-shadow(0 2px 6px rgba(0,0,0,.35));flex-shrink:0;background:transparent;}
+.intro-text{display:flex;flex-direction:column;gap:3px;min-width:0;}
+.intro-title{font-size:15px;font-weight:900;color:#fff;letter-spacing:-.01em;}
+.intro-sub{font-size:11px;color:rgba(255,255,255,.78);}
+.intro-sub strong{color:var(--goldlight);font-weight:800;}
+.intro-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;}
+.intro-cell{background:rgba(255,255,255,.09);border:1px solid rgba(255,255,255,.18);border-radius:8px;padding:7px 11px;display:flex;flex-direction:column;gap:5px;}
+.intro-cell h5{font-size:11.5px;font-weight:800;color:var(--goldlight);letter-spacing:-.01em;min-height:22px;display:flex;align-items:center;justify-content:center;text-align:center;}
+.intro-cell-img{display:flex;align-items:center;justify-content:center;height:120px;overflow:visible;background:transparent;}
+.intro-cell-img img{max-width:100%;max-height:140px;object-fit:contain;background:transparent;}
+.intro-cell-img.docs{position:relative;width:100%;}
+.intro-cell-img.docs img{position:absolute;height:108px;max-height:108px;width:auto;box-shadow:0 4px 12px rgba(0,0,0,.35);border-radius:3px;top:50%;}
+.intro-cell-img.docs img:nth-child(1){left:6%;transform:translateY(-50%) rotate(-7deg);z-index:1;}
+.intro-cell-img.docs img:nth-child(2){left:29%;transform:translateY(-50%) rotate(-2deg);z-index:2;}
+.intro-cell-img.docs img:nth-child(3){left:52%;transform:translateY(-50%) rotate(2deg);z-index:3;}
+.intro-cell-img.docs img:nth-child(4){left:75%;transform:translateY(-50%) rotate(7deg);z-index:4;}
+.intro-cell p{font-size:10.5px;color:rgba(255,255,255,.86);line-height:1.5;margin-top:auto;text-align:center;}
+
+/* PRODUCT (P02) */
+.lead-box{font-size:13px;line-height:1.75;color:var(--dark);background:var(--sky2);border-left:5px solid var(--brand);border-radius:0 10px 10px 0;padding:12px 16px;}
+.lead-box.big{font-size:13.5px;padding:12px 18px;line-height:1.7;}
+.lead-box strong{color:var(--brand);}
+
+/* 9-STEP PROCESS (5+4 rows for larger images) */
+.proc9{display:grid;grid-template-columns:repeat(5,1fr);gap:7px;}
+.proc-step{display:flex;flex-direction:column;gap:5px;min-width:0;}
+.proc-img{width:100%;height:115px;border-radius:7px;border:1px solid var(--border);overflow:hidden;background:var(--sky2);position:relative;box-shadow:0 2px 8px rgba(26,58,245,.1);}
+.proc-img img{width:100%;height:100%;object-fit:cover;background:transparent;display:block;}
+.proc-num{position:absolute;top:5px;left:5px;background:var(--brand);color:#fff;font-size:10px;font-weight:800;min-width:19px;height:19px;padding:0 5px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 1px 3px rgba(0,0,0,.3);} .proc-out{position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;font-size:10px;font-weight:800;text-align:center;padding:3px 0;letter-spacing:.02em;box-shadow:0 -2px 6px rgba(13,26,94,.3);}
+.proc-label{font-size:11px;font-weight:700;color:var(--navy);text-align:center;line-height:1.3;}
+
+/* CASE BANNER */
+.case-banner{background:var(--goldbg);border:1.5px solid var(--goldborder);border-radius:10px;padding:14px 18px;display:flex;align-items:center;gap:18px;margin-top:auto;}
+.cb-icon{font-size:30px;flex-shrink:0;align-self:flex-start;margin-top:1px;}
+.cb-content{flex:0 1 340px;min-width:0;display:flex;flex-direction:column;gap:7px;}
+.cb-title{font-size:10.5px;font-weight:800;color:var(--gold);letter-spacing:.08em;text-transform:uppercase;}
+.cb-main{font-size:13px;font-weight:800;color:var(--navy);line-height:1.55;}
+.cb-main strong{color:var(--brand);}
+.cb-sub{font-size:11px;color:var(--mid);line-height:1.6;}
+.cb-sub strong{color:var(--brand);font-weight:800;}
+.cb-badges{display:flex;gap:4px;flex-wrap:wrap;margin-top:2px;}
+.cb-badge{background:var(--goldlight);color:var(--navy);font-size:9.5px;font-weight:800;padding:3px 9px;border-radius:12px;letter-spacing:-.01em;}
+.cb-images{flex:1;display:flex;gap:10px;justify-content:flex-end;align-items:flex-start;min-width:0;}
+.cb-pair{display:flex;flex-direction:column;gap:5px;flex-shrink:0;width:325px;}
+.cb-pair-photos{display:flex;gap:4px;align-items:flex-start;}
+.cb-photo{display:flex;flex-direction:column;gap:5px;flex-shrink:0;width:225px;}
+.cb-img{height:150px;width:auto;max-width:100%;border-radius:7px;border:1px solid var(--goldborder);box-shadow:0 3px 10px rgba(0,0,0,.15);object-fit:cover;display:block;}
+.cb-img.portrait{object-position:center 18%;}
+.cb-cap{font-size:9.5px;font-weight:700;color:var(--navy);line-height:1.4;text-align:center;white-space:nowrap;}
+
+/* FEATURE BOXES */
+.pts-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+.pt-box{background:var(--white);border:1px solid var(--sky);border-radius:10px;padding:11px 13px;display:flex;align-items:flex-start;gap:9px;}
+.pt-num{width:22px;height:22px;border-radius:50%;background:var(--brand);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.pt-box h4{font-size:12.5px;font-weight:800;color:var(--navy);margin-bottom:3px;}
+.pt-box p{font-size:11px;color:var(--gray);line-height:1.5;}
+
+/* PRICING */
+.stbl{border:1.5px solid var(--border);border-radius:11px;overflow:hidden;}
+.stbl .th{background:var(--navy);color:#fff;font-size:12px;font-weight:800;padding:9px 16px;letter-spacing:.04em;}
+.sr{display:flex;border-bottom:1px solid var(--border);padding:9px 16px;gap:10px;align-items:center;}
+.sr:last-child{border-bottom:none;}
+.sr:nth-child(even){background:var(--sky2);}
+.sk{font-size:12px;font-weight:800;color:var(--mid);min-width:90px;}
+.sv{font-size:12px;color:var(--dark);}
+.sv strong{color:var(--brand);font-size:13px;}
+.sv .free{color:var(--green);font-weight:800;}
+/* CUSTOM OPTIONS (P03) */
+.opt-header{margin-top:2px;}
+.opt-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;letter-spacing:-.01em;}
+.opt-sub{font-size:11px;color:var(--gray);line-height:1.6;}
+.opt-sub strong{color:var(--brand);font-weight:800;}
+.opt-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.oc-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(26,58,245,.05);}
+.oc-img{background:var(--sky2);height:185px;display:flex;align-items:center;justify-content:center;padding:10px;gap:6px;border-bottom:1px solid var(--border);position:relative;}
+.oc-img img{max-height:100%;max-width:100%;width:auto;object-fit:contain;border-radius:5px;box-shadow:0 3px 8px rgba(0,0,0,.14);background:#fff;}
+.oc-img.dual{padding:12px;}
+.oc-img.dual img{position:absolute;max-height:165px;max-width:62%;width:auto;}
+.oc-img.dual img:nth-child(1){left:6%;top:50%;transform:translateY(-50%) rotate(-3deg);z-index:1;}
+.oc-img.dual img:nth-child(2){right:6%;top:50%;transform:translateY(-50%) rotate(3deg);z-index:2;}
+.oc-body{padding:11px 13px;display:flex;flex-direction:column;gap:8px;flex:1;}
+.oc-name{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.01em;}
+.oc-desc{font-size:10.5px;color:var(--gray);line-height:1.5;}
+.oc-price{display:flex;flex-direction:column;gap:1px;background:var(--sky2);border-radius:6px;padding:7px 10px;}
+.oc-price-row{display:flex;justify-content:space-between;align-items:center;font-size:10.5px;padding:2px 0;color:var(--dark);}
+.oc-price-row .val{font-weight:800;color:var(--brand);font-size:11px;}
+.oc-price-row .val.free{color:var(--green);}
+.oc-price-row.note{font-size:9.5px;color:var(--gray);}
+.oc-price-row.note span:last-child{font-weight:600;color:var(--mid);}
+.oc-rec{margin-top:auto;background:var(--goldbg);border-left:3px solid var(--gold);padding:7px 10px;font-size:10px;color:var(--dark);line-height:1.5;border-radius:0 6px 6px 0;}
+.oc-rec strong{color:var(--brand);font-weight:800;margin-right:4px;}
+
+/* LONG-TERM RENTAL (P04) */
+.lt-banner{background:linear-gradient(135deg,var(--navy) 0%,var(--brand) 100%);color:#fff;border-radius:9px;padding:9px 16px;}
+.lt-banner-msg{font-size:12px;line-height:1.55;color:rgba(255,255,255,.95);}
+.lt-banner-msg strong{color:var(--goldlight);font-weight:800;}
+
+.lt-groups{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;flex:1;}
+.ltg{background:var(--white);border:1.5px solid var(--border);border-radius:11px;overflow:hidden;display:flex;flex-direction:column;}
+.ltg-head{background:var(--sky2);padding:10px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1.5px solid var(--border);}
+.ltg-tag{font-size:9px;font-weight:800;color:var(--brand);background:#fff;border:1px solid rgba(26,58,245,.2);padding:2px 7px;border-radius:4px;letter-spacing:.06em;}
+.ltg-name{font-size:13px;font-weight:800;color:var(--navy);}
+.ltg-body{padding:8px 14px;flex:1;display:flex;flex-direction:column;}
+.ltg-row{flex:1;display:grid;grid-template-columns:auto auto 1fr;align-items:center;gap:8px;padding:8px 4px;border-bottom:1px dashed var(--border);}
+.ltg-row:last-child{border-bottom:none;}
+.ltg-row .period{font-size:11.5px;font-weight:800;color:var(--mid);}
+.ltg-row .total{font-size:16px;font-weight:900;color:var(--navy);line-height:1;}
+.ltg-row .total small{font-size:10px;font-weight:800;margin-left:1px;}
+.ltg-row .per{font-size:10px;color:var(--gray);text-align:right;}
+
+.ltg.long{background:linear-gradient(180deg,#fff 0%,var(--sky2) 100%);border-color:rgba(26,58,245,.35);box-shadow:0 3px 10px rgba(26,58,245,.08);}
+.ltg.long .ltg-head{background:rgba(26,58,245,.08);border-bottom-color:rgba(26,58,245,.22);}
+.ltg.long .ltg-tag{color:#fff;background:var(--brand);border-color:var(--brand);}
+
+.ltg.hero{background:var(--goldbg);border-color:var(--goldborder);border-width:2px;box-shadow:0 4px 14px rgba(232,168,0,.2);}
+.ltg.hero .ltg-head{background:rgba(255,255,255,.5);border-bottom-color:rgba(232,168,0,.35);}
+.ltg.hero .ltg-tag{color:#fff;background:var(--gold);border-color:var(--gold);}
+.ltg.hero .ltg-name{color:var(--goldtext);}
+.hero-body{align-items:center;justify-content:center;text-align:center;padding:14px;gap:6px;}
+.hero-label{font-size:11.5px;font-weight:800;color:var(--goldtext);letter-spacing:.04em;}
+.hero-num{font-size:36px;font-weight:900;color:var(--brand);line-height:1;margin:6px 0 8px;}
+.hero-num small{font-size:15px;font-weight:800;color:var(--navy);margin-left:2px;}
+.hero-per{font-size:13px;font-weight:700;color:var(--navy);margin-bottom:8px;}
+.hero-per strong{color:var(--brand);font-weight:900;font-size:14px;}
+.hero-note{font-size:10.5px;color:var(--mid);line-height:1.55;}
+.hero-example{margin-top:10px;padding:9px 12px;background:rgba(255,255,255,.55);border:1px solid rgba(232,168,0,.4);border-radius:7px;width:100%;text-align:center;}
+.he-title{font-size:10.5px;font-weight:800;color:var(--goldtext);margin-bottom:3px;letter-spacing:-.01em;}
+.he-calc{font-size:11px;color:var(--mid);line-height:1.5;}
+.he-calc strong{color:var(--brand);font-size:13.5px;font-weight:900;margin-left:2px;}
+.he-calc small{display:inline-block;font-size:9.5px;color:var(--gray);font-weight:600;margin-left:4px;}
+
+.lt-bot{display:flex;flex:1;}
+.ltbox-v2{flex:1;background:var(--white);border:1.5px solid var(--border);border-radius:10px;padding:13px 16px;display:flex;flex-direction:column;}
+.ltbox-v2 h4{font-size:12px;font-weight:800;color:var(--navy);margin-bottom:8px;}
+.bar-list{flex:1;display:flex;flex-direction:column;justify-content:space-around;}
+.bar-list .bar-item{margin-bottom:0;}
+
+.bar-item{display:flex;align-items:center;gap:7px;margin-bottom:5px;}
+.barlbl{font-size:10px;color:var(--gray);min-width:46px;text-align:right;font-weight:700;}
+.barlbl.hi{color:var(--brand);font-weight:800;}
+.bartrack{flex:1;background:var(--sky);border-radius:4px;height:16px;overflow:hidden;}
+.barfill{height:100%;border-radius:4px;display:flex;align-items:center;justify-content:flex-end;padding-right:6px;}
+.barval{font-size:9.5px;font-weight:800;color:#fff;white-space:nowrap;}
+.chart-legend{display:flex;flex-wrap:wrap;gap:5px;margin-top:9px;padding-top:9px;border-top:1px dashed var(--border);}
+.cl-item{font-size:9.5px;font-weight:700;padding:3px 8px;border-radius:5px;display:inline-flex;align-items:center;gap:4px;}
+.cl-item small{font-weight:500;opacity:.85;}
+.cl-item.warm{background:#fef3c7;color:#92400e;}
+.cl-item.cool{background:#dcfce7;color:#166534;}
+.cl-item.brand{background:rgba(26,58,245,.1);color:var(--brand);font-weight:800;}
+
+.lt-summary{background:var(--sky2);border-left:4px solid var(--brand);border-radius:0 8px 8px 0;padding:10px 16px;font-size:11.5px;color:var(--dark);line-height:1.55;}
+.lt-summary strong{color:var(--brand);font-weight:800;}
+
+/* FAQ */
+.faq-grid{display:grid;grid-template-columns:1fr 1fr;gap:7px;}
+.faq-item{background:var(--sky2);border:1.5px solid var(--border);border-radius:10px;padding:8px 12px;}
+.faq-q{font-size:11.5px;font-weight:800;color:var(--navy);margin-bottom:3px;display:flex;align-items:flex-start;gap:6px;}
+.qb{background:var(--brand);color:#fff;font-size:9.5px;font-weight:900;padding:1px 7px;border-radius:4px;flex-shrink:0;margin-top:1px;}
+.faq-a{font-size:10.5px;color:var(--gray);line-height:1.55;padding-left:26px;}
+.faq-a strong{color:var(--brand);}
+
+/* CTA SECTION (P05) */
+.cta-section{display:grid;grid-template-columns:0.85fr 1.45fr;gap:18px;padding:13px 18px;background:var(--sky2);border:1.5px solid rgba(26,58,245,.18);border-radius:12px;align-items:center;margin-top:auto;box-shadow:0 2px 8px rgba(26,58,245,.04);}
+.cta-left{display:flex;flex-direction:column;gap:10px;}
+.cta-trust{font-size:11px;font-weight:600;color:var(--mid);line-height:1.55;font-style:italic;padding:8px 12px;background:#fff;border-left:3px solid var(--brand);border-radius:0 6px 6px 0;}
+.cta-photo{width:100%;height:auto;border-radius:8px;box-shadow:0 3px 10px rgba(0,0,0,.12);}
+.cta-content{display:flex;flex-direction:column;gap:10px;}
+.cta-title{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:-.01em;line-height:1.45;}
+.cta-msg{font-size:11.5px;color:var(--mid);line-height:1.65;}
+.cta-process{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:1px;}
+.cta-step{background:#fff;border:1.5px solid var(--brand);color:var(--brand);font-size:10.5px;font-weight:800;padding:5px 11px;border-radius:18px;box-shadow:0 1px 3px rgba(26,58,245,.08);}
+.cta-arrow{color:var(--brand);font-weight:300;font-size:14px;line-height:1;}
+.cta-contact{display:flex;flex-direction:column;gap:3px;padding:6px 0 2px;border-top:1px dashed rgba(26,58,245,.15);}
+.cta-contact-main{display:flex;gap:20px;font-size:12.5px;color:var(--dark);padding-top:6px;flex-wrap:wrap;}
+.cta-contact-main span{display:inline-flex;align-items:center;gap:5px;}
+.cta-contact-main strong{color:var(--brand);font-weight:800;}
+.cta-buttons{display:flex;flex-direction:column;gap:8px;margin-top:6px;}
+.cta-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:8px;font-weight:800;text-decoration:none;letter-spacing:-.01em;transition:transform .15s;border:none;cursor:pointer;font-family:inherit;width:100%;}
+.cta-btn:hover{transform:translateY(-1px);}
+.cta-btn.primary{background:var(--brand);color:#fff;font-size:15px;padding:16px 22px;box-shadow:0 5px 16px rgba(26,58,245,.32);}
+.cta-contact-main a{color:inherit;text-decoration:none;}
+.cta-contact-main a:hover{text-decoration:underline;}
+.cta-content{flex:1;display:flex;flex-direction:column;gap:8px;}
+.cta-title{font-size:15px;font-weight:900;color:var(--navy);letter-spacing:-.01em;}
+.cta-msg{font-size:11.5px;color:var(--mid);line-height:1.6;}
+.cta-process{display:flex;align-items:center;gap:6px;margin-top:2px;flex-wrap:wrap;}
+.cta-step{background:#fff;border:1.5px solid var(--brand);color:var(--brand);font-size:11px;font-weight:800;padding:5px 13px;border-radius:18px;box-shadow:0 1px 3px rgba(26,58,245,.1);}
+.cta-arrow{color:var(--brand);font-weight:300;font-size:16px;line-height:1;}
+.cta-contact{display:flex;gap:16px;font-size:11px;color:var(--dark);margin-top:4px;flex-wrap:wrap;align-items:center;}
+.cta-contact span{display:inline-flex;align-items:center;gap:5px;}
+.cta-contact strong{color:var(--brand);font-weight:800;}
+
+img{background:var(--sky2);}
+.mobile-only{display:none;}
+@page{size:297mm 210mm;margin:0;}
+@media print{
+  *{-webkit-print-color-adjust:exact !important;print-color-adjust:exact !important;box-shadow:none !important;}
+  html,body{background:#fff;margin:0 !important;padding:0 !important;width:297mm;}
+  /* 강제 A4 가로 페이지 — 절대 넘치지 않게 */
+  .page{
+    margin:0 !important;padding:0 !important;
+    width:297mm !important;height:210mm !important;
+    min-height:210mm !important;max-height:210mm !important;
+    page-break-after:always !important;
+    page-break-inside:avoid !important;
+    break-inside:avoid !important;
+    break-after:page !important;
+    overflow:hidden !important;
+    position:relative;
+  }
+  .page:last-child{page-break-after:auto !important;break-after:auto !important;}
+  .cover{min-height:0 !important;height:210mm !important;}
+  .intro-cell{background:transparent !important;border:none !important;}
+  /* 모바일 전용 요소는 인쇄에서 확실히 숨김 */
+  .mobile-only{display:none !important;}
+  /* 데스크탑 전용은 인쇄에서 확실히 표시 */
+  .desktop-only{display:revert !important;}
+  .cb-cap .desktop-only{display:inline !important;}
+}
+
+/* ============ MOBILE — CONTENT-FLOW MODE ============
+   Strategy: A4 페이지 경계를 모바일에서 시각적으로 해체.
+   .page는 투명한 블록 컨테이너가 되고, 섹션들이 하나의 문서로 흐름.
+   푸터·페이지 번호는 모바일에서 숨김 (화면에 불필요).
+   `screen and` 한정 → 인쇄에서는 절대 적용 안 됨 (필수). */
+@media screen and (max-width:900px){
+  .desktop-only{display:none !important;}
+  .mobile-only{display:block !important;}
+  body{background:#f4f6fb;color:var(--dark);}
+
+  /* Dissolve page containers.
+     :not(.cover) — preserve cover's dark gradient (it doesn't use .inner). */
+  .page{
+    width:100%;max-width:100%;
+    min-height:0;height:auto;
+    margin:0;padding:0;
+    box-shadow:none;border-radius:0;
+    overflow:visible;
+    display:block;
+  }
+  .page:not(.cover){background:transparent;}
+
+  /* Inner content — natural block flow, generous breathing room */
+  .inner{
+    display:block;
+    padding:32px 18px 12px;
+    background:#fff;
+  }
+  .inner > *{margin-bottom:18px;}
+  .inner > *:last-child{margin-bottom:0;}
+
+  /* Hide page-level chrome */
+  .pf{display:none;}
+  .ph-num{display:none;}
+
+  /* Section header — content-style */
+  .ph-bar{flex-wrap:wrap;gap:6px 10px;align-items:baseline;
+    padding-bottom:11px;border-bottom:2px solid var(--sky);}
+  .ph-text{flex:1 1 100%;order:2;}
+  .ph-tag{order:1;font-size:10px;}
+  .ph-section{font-size:10px;letter-spacing:.08em;margin-bottom:3px;}
+  .ph-title{font-size:21px;line-height:1.3;}
+
+  /* "margin-top:auto" elements should flow naturally on mobile */
+  .intro-box,.case-banner,.cta-section{margin-top:0;}
+
+  /* ===== COVER ===== keep as a distinct hero block ===== */
+  .cover{min-height:0;border-radius:0;}
+  .cover-body{flex-direction:column;}
+  .cover-left{
+    flex:none;
+    padding:40px 22px 14px;
+    text-align:center;align-items:center;
+  }
+  .cover-right{flex:none;padding:6px 22px 28px;}
+  .cover-logo{width:78%;max-width:280px;margin:0 auto 16px;}
+  .co-sub{font-size:40px;margin-bottom:14px;}
+  .co-desc{font-size:13px;line-height:1.85;max-width:100%;margin:0 auto 16px;}
+  .co-pills{justify-content:center;gap:6px;}
+  .co-pill{font-size:11px;padding:5px 12px;}
+  .cover-stack{height:280px;padding:8px 6px;}
+  .cover-stack img{width:72%;}
+  .cover-stack .cs1,.cover-stack .cs2{height:220px;}
+  .cover-bottom{
+    flex-direction:column;gap:8px;
+    padding:14px 22px;text-align:center;
+  }
+  .cbi{font-size:10px;line-height:1.7;}
+  .cup{font-size:10px;}
+
+  /* ===== SECTION DIVIDERS ===== */
+  .sdiv{font-size:13px;padding-bottom:6px;}
+
+  /* ===== LEAD BOX ===== */
+  .lead-box,.lead-box.big{font-size:13.5px;padding:13px 15px;line-height:1.75;}
+
+  /* ===== COMPANY INTRO ===== */
+  .intro-box{padding:18px 16px;border-radius:10px;}
+  .intro-head{flex-direction:column;text-align:center;gap:10px;margin-bottom:14px;}
+  .intro-logo{width:60px;height:60px;}
+  .intro-title{font-size:16px;}
+  .intro-sub{font-size:12px;line-height:1.6;}
+  .intro-grid{grid-template-columns:1fr;gap:10px;}
+  .intro-cell{padding:12px;}
+  .intro-cell h5{font-size:13px;min-height:0;}
+  .intro-cell-img{height:auto;min-height:130px;}
+  .intro-cell-img img{max-height:170px;}
+  .intro-cell-img.docs{height:140px;}
+  .intro-cell-img.docs img{height:120px;max-height:120px;}
+  .intro-cell p{font-size:11.5px;}
+
+  /* ===== PAIN / USE-CASE CARDS ===== */
+  .pg3,.pg4{grid-template-columns:1fr 1fr;gap:8px;}
+  .pg6{grid-template-columns:repeat(3,1fr);gap:7px;}
+  .pc{padding:11px 12px;border-radius:9px;}
+  .pc p{font-size:12px;line-height:1.6;}
+  .pc .who{font-size:12px;}
+  .pc.uc p{font-size:11.5px;}
+
+  /* ===== 9-STEP PROCESS ===== */
+  .proc9{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .proc-img{height:140px;}
+  .proc-label{font-size:12px;}
+
+  /* ===== CASE BANNER ===== */
+  .case-banner{
+    flex-direction:column;align-items:stretch;
+    gap:14px;padding:16px;border-radius:10px;
+  }
+  .cb-icon{font-size:28px;align-self:flex-start;}
+  .cb-content{flex:none;}
+  .cb-main{font-size:13.5px;}
+  .cb-sub{font-size:11.5px;}
+  .cb-images{justify-content:center;flex-wrap:wrap;gap:8px;}
+  .cb-pair{width:100%;}
+  .cb-pair-photos{justify-content:center;flex-wrap:wrap;gap:6px;}
+  .cb-photo{width:48%;}
+  .cb-img{height:200px;width:100%;object-fit:cover;}
+  .cb-cap{white-space:normal;font-size:10.5px;}
+
+  /* ===== FEATURE BOXES ===== */
+  .pts-grid{grid-template-columns:1fr;gap:9px;}
+  .pt-box{padding:12px 13px;}
+  .pt-box h4{font-size:13px;}
+  .pt-box p{font-size:11.5px;}
+
+  /* ===== OPTIONS ===== */
+  .opt-title{font-size:15px;}
+  .opt-sub{font-size:12px;}
+  .opt-cards{grid-template-columns:1fr;gap:12px;}
+  .oc-img{height:210px;}
+  .oc-name{font-size:14px;}
+  .oc-desc{font-size:11.5px;}
+  .oc-price-row{font-size:11.5px;}
+
+  /* ===== PRICING TABLE ===== */
+  .stbl{border-radius:10px;}
+  .stbl .th{font-size:13px;padding:11px 15px;}
+  .sr{flex-direction:column;align-items:flex-start;gap:3px;padding:11px 15px;}
+  .sk{min-width:0;font-size:11.5px;}
+  .sv{font-size:12.5px;}
+
+  /* ===== LONG-TERM RENTAL ===== */
+  .lt-banner{padding:11px 16px;border-radius:9px;}
+  .lt-banner-msg{font-size:12.5px;}
+  .lt-groups{grid-template-columns:1fr;gap:10px;}
+  .hero-num{font-size:34px;}
+  .hero-num small{font-size:14px;}
+  .lt-bot{flex-direction:column;gap:10px;}
+  .ltbox-v2{padding:14px;}
+
+  /* ===== FAQ ===== */
+  .faq-grid{grid-template-columns:1fr;gap:8px;}
+  .faq-item{padding:10px 13px;}
+  .faq-q{font-size:12.5px;}
+  .faq-a{font-size:11.5px;line-height:1.6;}
+
+  /* ===== CTA ===== */
+  .cta-section{
+    grid-template-columns:1fr;gap:14px;
+    padding:16px;border-radius:11px;
+  }
+  .cta-title{font-size:16px;line-height:1.45;}
+  .cta-msg{font-size:12.5px;line-height:1.7;}
+  .cta-process{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+  .cta-step{font-size:12px;padding:8px 10px;display:flex;align-items:center;justify-content:center;text-align:center;}
+  .cta-arrow{display:none;}
+  .cta-contact-main{flex-direction:column;gap:8px;font-size:13px;}
+  .cta-btn.primary{font-size:15px;padding:15px 20px;}
+}
+
+/* ===== SMALL PHONES ===== */
+@media screen and (max-width:480px){
+  .inner{padding:26px 14px 8px;}
+  .ph-title{font-size:19px;}
+  .pg3,.pg4{grid-template-columns:1fr;}
+  .pg6{grid-template-columns:1fr 1fr;}
+  .proc9{grid-template-columns:1fr;}
+  .proc-img{height:180px;}
+  .cb-photo{width:100%;}
+  .cover-logo{width:88%;}
+  .co-sub{font-size:38px;}
+  .hero-num{font-size:30px;}
+  .cta-title{font-size:15px;}
+}
+
+.sams-to{position:absolute;top:24px;right:28px;z-index:9;display:flex;align-items:center;gap:9px;background:#fff;border-radius:30px;padding:7px 16px 7px 13px;box-shadow:0 4px 14px rgba(0,0,0,.25)}
+.sams-to span{font-size:10.5px;font-weight:800;color:#7a7a7a;letter-spacing:.06em}
+.sams-to img{height:17px;display:block}
+.sams-cover{height:56px !important;width:auto !important;max-width:380px;display:block;margin-bottom:20px;background:transparent !important;object-fit:contain;filter:drop-shadow(0 2px 10px rgba(0,0,0,.45))}
+</style>
+</head>
+<body>
+
+<!-- ═══════ COVER ═══════ -->
+<div class="page cover">
+  <div class="cover-body">
+    <div class="cover-left">
+      <div class="recv"><img class="recv-logo" src="images/recv_sasang.png" alt="부산광역시교육청지정 사상구진로교육지원센터 행진"><span class="recv-name">부산광역시교육청지정 사상구진로교육지원센터 행진 <b>귀중</b></span></div>
+      <div class="co-sub">드림텔러 포토부스 제안서</div>
+      <div class="co-desc">간단한 질문 응답과 사진 촬영만으로<br><strong>나만의 미래 직업인 명함</strong>을 만들어 보는 체험형 AI 진로 콘텐츠입니다.<br><span style="color:#bcd4ff">부산광역시교육청지정 사상구진로교육지원센터 행진의 진로 체험 현장을 위한 제안입니다.</span></div>
+      <div class="co-pills">
+        <div class="co-pill">🏫 학교 진로체험</div>
+        <div class="co-pill">🎯 진로주간·진로축제</div>
+        <div class="co-pill">🧭 진로센터 체험</div>
+        <div class="co-pill">🤝 기업 CSR·진로행사</div>
+      </div>
+    </div>
+    <div class="cover-right">
+      <div class="cover-stack">
+        <img loading="lazy" decoding="async"class="cs1" src="images/cover1.jpg" alt="드림텔러 현장1">
+        <img loading="lazy" decoding="async"class="cs2" src="images/cover2.jpg" alt="드림텔러 현장2">
+      </div>
+    </div>
+  </div>
+  <div class="cover-bottom">
+    <div class="cbi"><strong>사자가온다 주식회사</strong>&nbsp;|&nbsp;본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호&nbsp;|&nbsp;지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호<br>📧 info@sjgod.kr&nbsp;|&nbsp;📞 070-0749-0105&nbsp;|&nbsp;🌐 www.sjgod.kr</div>
+    <div class="cup">PROPOSAL UPDATE · 26.05.16</div>
+  </div>
+</div>
+
+<!-- ═══════ P01 현장의 목소리 ═══════ -->
+<div class="page">
+  <div class="inner">
+    <div class="ph-bar">
+      <div class="ph-num">1</div>
+      <div style="flex:1;min-width:0">
+        <div class="ph-section">PROBLEM · 현장의 목소리</div>
+        <div class="ph-title">학생의 흥미와 진로 동기를 함께 높이는 <em>차별화된 진로 체험 콘텐츠</em>를 찾고 계신가요?</div>
+      </div>
+    </div>
+    <div class="prob-main">
+      <div class="prob-left">
+    <div class="sdiv t">🏫 학교·진로센터·기업 담당자의 고민</div>
+    <div class="pg3">
+      <div class="pc"><div class="who">A 선생님</div><p>매년 비슷한 진로 체험.. 학생들이 흥미를 느낄 새로운 콘텐츠가 없을까요?</p></div>
+      <div class="pc"><div class="who">B 담당자</div><p>많은 학생이 즐겁게 참여하도록 운영·관리하기가 쉽지&nbsp;않아요.</p></div>
+      <div class="pc"><div class="who">C 담당자</div><p>쉽고, 간단하게 운영할 수 있는 진로 체험 프로그램을 찾고 있어요.</p></div>
+    </div>
+    <div class="sdiv s">🧑‍🎓 참여 학생의 고민</div>
+    <div class="pg4">
+      <div class="pc sc"><div class="who">D 학생</div><p>읽어야 하는 것도 많고, 직접 쓰고 만드는 과정이 너무 부담스러워요.</p></div>
+      <div class="pc sc"><div class="who">E 학생</div><p>몰입도 안 되고 재미도 없지만 그냥 해야 하니까 하는 거죠.</p></div>
+      <div class="pc sc"><div class="who">F 학생</div><p>맨날 똑같은 내용의 프로그램.. 큰 기대가 안 돼요.</p></div>
+      <div class="pc sc"><div class="who">G 학생</div><p>언제 끝나는지만 기다리게 되는 진로 행사가 너무 많아요.</p></div>
+    </div>
+    <div class="sdiv u">💡 드림텔러가 필요한 활용 현장</div>
+    <div class="pg6">
+      <div class="pc uc"><p>학교<br>진로체험의 날</p></div>
+      <div class="pc uc"><p>진로주간<br>·진로축제</p></div>
+      <div class="pc uc"><p>자유학기제<br>진로 활동</p></div>
+      <div class="pc uc"><p>진로센터<br>체험 부스</p></div>
+      <div class="pc uc"><p>지역 학생<br>초청 체험</p></div>
+      <div class="pc uc"><p>기업 CSR<br>·진로행사</p></div>
+    </div>
+      </div>
+      <div class="ph-demo">
+        <figure><div class="gifwrap"><span class="dt-badge">▶ 실제 이용</span><img src="images/demo_use.gif" alt="드림텔러 실제 이용 장면"></div><figcaption>실제 이용 모습</figcaption></figure>
+        <figure><div class="gifwrap"><span class="dt-badge">▶ 키오스크</span><img src="images/demo_kiosk.gif" alt="드림텔러 키오스크 부스"></div><figcaption>키오스크 부스</figcaption></figure>
+      </div>
+    </div>
+    <div class="intro-box">
+      <div class="intro-head">
+        <img loading="lazy" decoding="async"class="intro-logo" src="images/sjgod_logo.png" alt="사자가온다 로고">
+        <div class="intro-text">
+          <div class="intro-title">검증된 R&amp;D 역량으로 진로 교육의 혁신을 이끕니다</div>
+          <div class="intro-sub"><strong>사자가온다(주)</strong> | 기술력과 콘텐츠 전문성을 모두 갖춘 에듀테크 팀</div>
+        </div>
+      </div>
+      <div class="intro-grid">
+        <div class="intro-cell">
+          <h5>AI 진로상담 솔루션 &lt;퀘스트스쿨&gt;</h5>
+          <div class="intro-cell-img"><img loading="lazy" decoding="async"src="images/quest_school.png" alt="퀘스트스쿨"></div>
+          <p>KERIS 2024-2025 에듀테크<br>현안해결 프로젝트 선정</p>
+        </div>
+        <div class="intro-cell">
+          <h5>콘텐츠 개발 전담팀 보유</h5>
+          <div class="intro-cell-img"><img loading="lazy" decoding="async"src="images/contents.png" alt="사자가온다 콘텐츠"></div>
+          <p>포트폴리오, SDGs사회문제 탐색 웹게임 등<br>수십 종의 진로 교재·교구</p>
+        </div>
+        <div class="intro-cell">
+          <h5>진로 교육 R&amp;D 전문성</h5>
+          <div class="intro-cell-img docs">
+            <img loading="lazy" decoding="async"src="images/cert_venture.png" alt="벤처기업확인서">
+            <img loading="lazy" decoding="async"src="images/patent1.png" alt="특허증1">
+            <img loading="lazy" decoding="async"src="images/patent2.png" alt="특허증2">
+            <img loading="lazy" decoding="async"src="images/patent3.png" alt="특허증3">
+          </div>
+          <p>벤처기업 인증 (혁신성장유형)<br>+ 진로 콘텐츠 관련 특허 9건</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf">
+  <div class="pf-info"><strong>사자가온다(주)</strong>&nbsp;|&nbsp;본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호&nbsp;|&nbsp;지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호&nbsp;|&nbsp;www.sjgod.kr</div>
+  <div class="pf-right"><span class="pf-brand">DREAM TELLER 제안서</span><span class="pf-pg">P 01</span></div>
+</div>
+</div>
+
+<!-- ═══════ P02 제품 소개 ═══════ -->
+<div class="page">
+  <div class="inner">
+    <div class="ph-bar">
+      <div class="ph-num">2</div>
+      <div>
+        <div class="ph-section">SOLUTION · 드림텔러 소개</div>
+        <div class="ph-title"><em>AI 포토부스 '드림텔러'</em> — 새로운 진로 동기부여의 해답</div>
+      </div>
+    </div>
+    <div class="lead-box big">참여자가 질문에 답하고 사진을 촬영하면, 희망 직업과 <strong>'AI 나이 변환 기술'</strong>이 적용된 미래 직업인 명함을 즉석에서 출력하는 <strong>체험형 AI 포토부스</strong>입니다.</div>
+    <div class="proc9">
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">1</span><img loading="lazy" decoding="async"src="images/step1.jpg" alt="메인화면"></div><div class="proc-label">메인 화면</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">2</span><img loading="lazy" decoding="async"src="images/step2.jpg" alt="이름입력"></div><div class="proc-label">이름 입력</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">3</span><img loading="lazy" decoding="async"src="images/step3.jpg" alt="정보입력"></div><div class="proc-label">정보 입력</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">4</span><img loading="lazy" decoding="async"src="images/step4.jpg" alt="진단검사"></div><div class="proc-label">진단 검사</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">5</span><img loading="lazy" decoding="async"src="images/step5.jpg" alt="선택내용"></div><div class="proc-label">선택 내용</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">6</span><img loading="lazy" decoding="async"src="images/step6.jpg" alt="홀랜드 결과"></div><div class="proc-label">홀랜드 결과</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">7</span><img loading="lazy" decoding="async"src="images/step7.jpg" alt="직업선택"></div><div class="proc-label">직업 선택</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">8</span><img loading="lazy" decoding="async"src="images/step8.jpg" alt="직업정보"></div><div class="proc-label">직업 정보</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">9</span><img loading="lazy" decoding="async"src="images/step9.png" alt="얼굴촬영"></div><div class="proc-label">얼굴 촬영</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">10</span><img loading="lazy" decoding="async"src="images/output_real.jpg" alt="미래명함 출력 결과물"><span class="proc-out">바로 결과물 출력</span></div><div class="proc-label">사진 출력</div></div>
+    </div>
+    <div class="sdiv t mobile-only">드림텔러의 특징</div>
+    <div class="pts-grid">
+      <div class="pt-box"><div class="pt-num">1</div><div><h4>빠르고 직관적인 체험</h4><p>3~5분 이내 체험 완료 및 누구나 즉시 참여 가능</p></div></div>
+      <div class="pt-box"><div class="pt-num">2</div><div><h4>간결한 프로세스</h4><p>질문 응답 → 사진 촬영으로 이어지는 2단계 초간단 과정</p></div></div>
+      <div class="pt-box"><div class="pt-num">3</div><div><h4>세상에 하나뿐인 결과물</h4><p>자신의 미래 얼굴이 담긴 '미래 직업인 명함' 즉석 인쇄</p></div></div>
+      <div class="pt-box"><div class="pt-num">4</div><div><h4>행사 몰입도 극대화</h4><p>최신 AI 기술과 진로 체험의 융합으로 참여 만족도 증대</p></div></div>
+    </div>
+    <div class="case-banner">
+      <div class="cb-icon">🏛️</div>
+      <div class="cb-content">
+        <div class="cb-title">도입 사례</div>
+        <div class="cb-main">드림텔러는 대한민국 대표 진로·직업체험관 한국잡월드와 <strong>2025년 미래콘텐츠 MOU 체결</strong> 이후,<br><strong>2026년 공식 도입</strong>된 미래 진로 체험 콘텐츠입니다.</div>
+        <div class="cb-sub">현재 한국잡월드 2층 미래체험관에 <strong>총 14대</strong>가 설치되어, 참여자가 자신의 미래 모습을 상상하고 진로 동기를 확장하는 체험 콘텐츠로 운영되고 있습니다.</div>
+        <div class="cb-badges">
+          <span class="cb-badge">2025 MOU 체결</span>
+          <span class="cb-badge">2026 공식 도입</span>
+          <span class="cb-badge">미래체험관 14대 운영</span>
+        </div>
+      </div>
+      <div class="cb-images">
+        <div class="cb-pair">
+          <div class="cb-pair-photos">
+            <img loading="lazy" decoding="async"class="cb-img" src="images/case_jobworld.jpg" alt="한국잡월드 미래체험관">
+            <img loading="lazy" decoding="async"class="cb-img portrait desktop-only" src="images/case_ceo.png" alt="이민재 대표이사">
+          </div>
+          <div class="cb-cap">▲ 한국잡월드 드림텔러 전경<span class="desktop-only"> · 총괄 기획 이민재 대표</span></div>
+        </div>
+        <div class="cb-photo">
+          <img loading="lazy" decoding="async"class="cb-img" src="images/case_mou.jpg" alt="한국잡월드-사자가온다 MOU">
+          <div class="cb-cap">▲ 한국잡월드-사자가온다(주) 미래콘텐츠 MOU</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf">
+  <div class="pf-info"><strong>사자가온다(주)</strong>&nbsp;|&nbsp;본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호&nbsp;|&nbsp;지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호&nbsp;|&nbsp;www.sjgod.kr</div>
+  <div class="pf-right"><span class="pf-brand">DREAM TELLER 제안서</span><span class="pf-pg">P 02</span></div>
+</div>
+</div>
+
+<!-- ═══════ P03 기본 사양·비용 ═══════ -->
+<div class="page">
+  <div class="inner">
+    <div class="ph-bar">
+      <div class="ph-num">3</div>
+      <div>
+        <div class="ph-section">PRICING · 기본 사양 및 비용</div>
+        <div class="ph-title"><em>드림텔러</em> 베이직 사양·비용 (VAT 포함)</div>
+      </div>
+    </div>
+    <div class="stbl">
+      <div class="th">📋 기기 기본 사양 및 렌탈 조건</div>
+      <div class="sr"><span class="sk">기기 사이즈</span><span class="sv">(가로) 400 × (깊이) 400 × (높이) 1,500mm</span></div>
+      <div class="sr"><span class="sk">운영 기준</span><span class="sv">1일 기준 · 오전 10시 설치 ~ 오후 6시 철거</span></div>
+      <div class="sr"><span class="sk">1일 렌탈비</span><span class="sv"><strong>935,000원</strong> (부가세 포함)</span></div>
+      <div class="sr"><span class="sk">왕복 배송료</span><span class="sv">서울·인천 11만원 / 경기 16.5만원 / 그 외 지역 22만원</span></div>
+      <div class="sr"><span class="sk">설치/철거비</span><span class="sv"><span class="free">✅ 무료</span></span></div>
+      <div class="sr"><span class="sk">소프트웨어</span><span class="sv">커스텀 불가 · 기본 세팅 기준</span></div>
+    </div>
+    <div class="opt-header">
+      <div class="opt-title">🎨 귀사 브랜드·행사에 맞춘 선택형 커스텀 옵션</div>
+      <div class="opt-sub">기본 운영은 무료 옵션으로도 가능하며, 귀사 로고·행사 주제·사옥 공간에 맞춰 <strong>UI, 질문, 명함 직무, 외관 랩핑</strong>을 선택적으로 커스터마이징할 수 있습니다.</div>
+      <div style="margin:16px 0 2px;background:linear-gradient(135deg,#0a1f6b,#1a3af5);border-radius:14px;padding:18px 22px;color:#fff;box-shadow:0 6px 20px rgba(20,40,160,.25)"><div style="font-size:15px;font-weight:800;margin-bottom:7px">⭐ 핵심 커스터마이징 — 미래 직업인 명함에 ‘귀사의 직무’를 담습니다</div><div style="font-size:13px;line-height:1.75;color:#dfe6ff">반도체 엔지니어 · SW 개발자 · 디자인 · 마케팅 · 데이터 사이언티스트 등 <strong style="color:#fff">귀사의 다양한 직업과 직무</strong>를 명함 콘텐츠로 구성해, 학생이 자신의 미래를 <strong style="color:#fff">‘미래의 직업인’</strong>으로 직접 상상하도록 설계할 수 있습니다.</div></div>
+    </div>
+    <div class="opt-cards">
+      <div class="oc-card">
+        <div class="oc-img dual">
+          <img loading="lazy" decoding="async"src="images/opt_main.jpg" alt="메인 화면">
+          <img loading="lazy" decoding="async"src="images/opt_card.jpg" alt="출력 명함">
+        </div>
+        <div class="oc-body">
+          <div class="oc-name">UI 디자인 변경</div>
+          <div class="oc-desc">귀사 로고와 행사 콘셉트를 반영한 화면 디자인 변경</div>
+          <div class="oc-price">
+            <div class="oc-price-row"><span>기본 디자인</span><span class="val free">무료</span></div>
+            <div class="oc-price-row"><span>로고 추가</span><span class="val">11,000원</span></div>
+            <div class="oc-price-row"><span>맞춤 디자인</span><span class="val">55,000원</span></div>
+          </div>
+          <div class="oc-rec"><strong>추천</strong> 귀사 로고 노출, 사내 행사 브랜딩이 필요한 경우</div>
+        </div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-img">
+          <img loading="lazy" decoding="async"src="images/opt_question.jpg" alt="질문 변경 화면">
+        </div>
+        <div class="oc-body">
+          <div class="oc-name">질문 변경 / 추가</div>
+          <div class="oc-desc">체험 목적에 맞춰 질문과 답변 내용을 조정</div>
+          <div class="oc-price">
+            <div class="oc-price-row"><span>기본 질문 9개</span><span class="val free">무료</span></div>
+            <div class="oc-price-row"><span>텍스트 수정</span><span class="val">5,500원</span></div>
+            <div class="oc-price-row"><span>질문 추가</span><span class="val">11,000원</span></div>
+          </div>
+          <div class="oc-rec"><strong>추천</strong> 진로·ESG·AI·지역 특화 주제 등 행사 목적을 반영할 때</div>
+        </div>
+      </div>
+      <div class="oc-card">
+        <div class="oc-img">
+          <img loading="lazy" decoding="async"src="images/opt_booth.png" alt="부스 면 안내">
+        </div>
+        <div class="oc-body">
+          <div class="oc-name">부스 랩핑</div>
+          <div class="oc-desc">키오스크 외관을 행사 공간과 브랜드 톤에 맞게 연출</div>
+          <div class="oc-price">
+            <div class="oc-price-row"><span>1면당</span><span class="val">55,000원</span></div>
+            <div class="oc-price-row"><span>전체 랩핑</span><span class="val">247,500원</span></div>
+            <div class="oc-price-row note"><span>디자인·랩핑 작업</span><span>약 3~7일 소요</span></div>
+          </div>
+          <div class="oc-rec"><strong>추천</strong> 상설 운영, 포토존 연출, 사옥 홍보 효과가 필요한 경우</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf">
+  <div class="pf-info"><strong>사자가온다(주)</strong>&nbsp;|&nbsp;본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호&nbsp;|&nbsp;지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호&nbsp;|&nbsp;www.sjgod.kr</div>
+  <div class="pf-right"><span class="pf-brand">DREAM TELLER 제안서</span><span class="pf-pg">P 03</span></div>
+</div>
+</div>
+
+<!-- ═══════ P04 장기 렌탈 ═══════ -->
+<div class="page">
+  <div class="inner">
+    <div class="ph-bar">
+      <div class="ph-num">4</div>
+      <div class="ph-text">
+        <div class="ph-section">LONG-TERM PRICING · 장기 렌탈 가격 정책</div>
+        <div class="ph-title">3개월 이후 <em>월 46.2만원</em>, 장기 운영에 유리한 렌탈 구조</div>
+      </div>
+      <span class="ph-tag">VAT 포함</span>
+    </div>
+    <div class="lt-banner">
+      <div class="lt-banner-msg"><strong>초기 3개월</strong>은 설치·렌탈 포함 패키지, <strong>4개월 차부터는 월 46.2만원 유지보수 비용만 발생</strong>합니다.</div>
+    </div>
+    <div class="lt-groups">
+      <div class="ltg">
+        <div class="ltg-head">
+          <span class="ltg-tag">SHORT-TERM</span>
+          <span class="ltg-name">단기 행사형</span>
+        </div>
+        <div class="ltg-body">
+          <div class="ltg-row"><span class="period">1일</span><span class="total">93.5<small>만원</small></span><span class="per">1일 기준 93.5만원</span></div>
+          <div class="ltg-row"><span class="period">1주</span><span class="total">231<small>만원</small></span><span class="per">1일 기준 33만원</span></div>
+          <div class="ltg-row"><span class="period">2주</span><span class="total">308<small>만원</small></span><span class="per">1일 기준 22만원</span></div>
+        </div>
+      </div>
+      <div class="ltg long">
+        <div class="ltg-head">
+          <span class="ltg-tag">LONG-TERM</span>
+          <span class="ltg-name">장기 운영형</span>
+        </div>
+        <div class="ltg-body">
+          <div class="ltg-row"><span class="period">1개월</span><span class="total">462<small>만원</small></span><span class="per">1일 기준 15.4만원</span></div>
+          <div class="ltg-row"><span class="period">2개월</span><span class="total">616<small>만원</small></span><span class="per">1일 기준 10.3만원</span></div>
+          <div class="ltg-row"><span class="period">3개월</span><span class="total">770<small>만원</small></span><span class="per">1일 기준 8.6만원</span></div>
+        </div>
+      </div>
+      <div class="ltg hero">
+        <div class="ltg-head">
+          <span class="ltg-tag">MAINTENANCE</span>
+          <span class="ltg-name">유지보수 전환</span>
+        </div>
+        <div class="ltg-body hero-body">
+          <div class="hero-label">4개월차부터</div>
+          <div class="hero-num">월 46.2<small>만원</small></div>
+          <div class="hero-per">1일 기준 <strong>1.5만원</strong></div>
+          <div class="hero-note">장기 운영 고객 대상</div>
+          <div class="hero-example">
+            <div class="he-title">📊 6개월 운영 예시</div>
+            <div class="he-calc">3개월 렌탈 770만원 + 3개월 유지보수 138.6만원<br>= <strong>908.6만원</strong> <small>(1일 기준 약 5.0만원)</small></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="lt-bot">
+      <div class="ltbox-v2">
+        <h4>📉 기간별 1일 기준 단가 하락 · 추천 활용</h4>
+        <div class="bar-list">
+          <div class="bar-item"><span class="barlbl">1일</span><div class="bartrack"><div class="barfill" style="width:100%;background:linear-gradient(90deg,#ef4444,#f97316);"><span class="barval">93.5만원</span></div></div></div>
+          <div class="bar-item"><span class="barlbl">1주</span><div class="bartrack"><div class="barfill" style="width:35%;background:linear-gradient(90deg,#f97316,#eab308);"><span class="barval">33만원</span></div></div></div>
+          <div class="bar-item"><span class="barlbl">2주</span><div class="bartrack"><div class="barfill" style="width:24%;background:#eab308;"><span class="barval">22만원</span></div></div></div>
+          <div class="bar-item"><span class="barlbl">1개월</span><div class="bartrack"><div class="barfill" style="width:17%;background:#22c55e;min-width:42px;"><span class="barval">15.4만원</span></div></div></div>
+          <div class="bar-item"><span class="barlbl">2개월</span><div class="bartrack"><div class="barfill" style="width:11%;background:#10b981;min-width:42px;"><span class="barval">10.3만원</span></div></div></div>
+          <div class="bar-item"><span class="barlbl">3개월</span><div class="bartrack"><div class="barfill" style="width:9%;background:#06b6d4;min-width:42px;"><span class="barval">8.6만원</span></div></div></div>
+          <div class="bar-item"><span class="barlbl hi">3개월~</span><div class="bartrack" style="border:1.5px solid rgba(26,58,245,.4);"><div class="barfill" style="width:6%;background:var(--brand);min-width:42px;"><span class="barval">5.0만원</span></div></div></div>
+        </div>
+        <div class="chart-legend">
+          <span class="cl-item warm">📍 단기 행사형 <small>1일~2주</small></span>
+          <span class="cl-item cool">📍 캠페인·팝업 운영형 <small>1~3개월</small></span>
+          <span class="cl-item brand">⭐ 상설 운영형 <small>3개월 이후</small></span>
+        </div>
+      </div>
+    </div>
+    <div class="lt-summary"><strong>장기 운영을 전제로 할수록</strong> 기업의 예산 부담은 낮아지고, 체험 콘텐츠의 상시 활용성은 높아집니다.</div>
+  </div>
+  <div class="pf">
+  <div class="pf-info"><strong>사자가온다(주)</strong>&nbsp;|&nbsp;본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호&nbsp;|&nbsp;지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호&nbsp;|&nbsp;www.sjgod.kr</div>
+  <div class="pf-right"><span class="pf-brand">DREAM TELLER 제안서</span><span class="pf-pg">P 04</span></div>
+</div>
+</div>
+
+<!-- ═══════ P05 FAQ + 예약 과정 ═══════ -->
+<div class="page">
+  <div class="inner">
+    <div class="ph-bar">
+      <div class="ph-num">5</div>
+      <div>
+        <div class="ph-section">FAQ · 자주 묻는 질문</div>
+        <div class="ph-title"><em>드림텔러</em> 자주 묻는 질문</div>
+      </div>
+    </div>
+    <div class="faq-grid">
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>최소 렌탈 기간이 있나요?</div><div class="faq-a"><strong>1일부터 렌탈 가능</strong>합니다. 기간이 길수록 1일 기준 단가가 대폭 절감됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>기기 설치에 필요한 조건이 있나요?</div><div class="faq-a">실내 공간, <strong>220V 콘센트(1구)</strong>, 와이파이 또는 유선 인터넷이 필요합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>전담 운영 인력이 별도로 필요한가요?</div><div class="faq-a">별도 인력 없이 <strong>자동 운영</strong>됩니다. 학생들이 터치 UI를 통해 스스로 체험합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>장기 렌탈 기간 중 기기 오류가 발생하면 어떻게 대응하나요?</div><div class="faq-a"><strong>원격으로 기기 상태를 우선 확인</strong>하며, 필요 시 현장 기술지원 또는 AS를 통해 운영 중단을 최소화합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>사옥·연수원 외 다른 장소에도 설치 가능한가요?</div><div class="faq-a">체험관, 박람회장, 기업 행사장 등 <strong>실내 공간이라면 어디든</strong> 설치 가능합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>촬영된 사진 데이터는 어떻게 처리되나요?</div><div class="faq-a">명함 생성 후 <strong>즉시 삭제</strong>됩니다. 개인정보보호법 기준을 준수합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>하루에 몇 명이나 체험할 수 있나요?</div><div class="faq-a">1인당 약 <strong>3~5분</strong> 소요. 하루 최대 약 <strong>100~150명</strong> 체험이 가능합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>예상 체험 인원을 초과하면 비용이 추가되나요?</div><div class="faq-a">출력물과 AI 사용량이 기본 제공 범위를 초과할 경우, <strong>실제 사용량 기준</strong>으로 추가 정산됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>출력되는 명함은 어떤 형태인가요?</div><div class="faq-a">참여자의 <strong>실제 얼굴 + AI 나이 변환</strong> 이미지와 희망 직업 정보가 담긴 명함이 출력됩니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>배송·설치·철거는 어떻게 진행되나요?</div><div class="faq-a">당일 <strong>오전 10시 설치, 오후 6시 철거</strong>. 설치·철거비 무료, 왕복 배송료만 지역별 청구.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>세금계산서 발행이 가능한가요?</div><div class="faq-a"><strong>세금계산서 발행 가능</strong>합니다. 학교·공공기관 구매품의 절차에 맞게 서류 발급 가능합니다.</div></div>
+      <div class="faq-item"><div class="faq-q"><span class="qb">Q</span>견적서는 어떻게 받을 수 있나요?</div><div class="faq-a">담당자에게 문의하시거나, 안내 페이지의 견적 요청 링크에서 자동 견적서를 발급받으실 수 있습니다.</div></div>
+    </div>
+    <div class="cta-section">
+      <div class="cta-left">
+        <div class="cta-trust">"현장 운영 경험이 있는 팀이<br>직접 설치와 운영을 지원합니다"</div>
+        <img loading="lazy" decoding="async"class="cta-photo" src="images/team_photo.png" alt="사자가온다(주) 팀">
+      </div>
+      <div class="cta-content">
+        <div class="cta-title">기업 상황에 맞는 운영 방식과 견적을 안내드립니다</div>
+        <div class="cta-msg">체험 인원, 운영 기간, 설치 장소를 알려주시면 가장 적합한 구성과 견적을 안내드립니다.</div>
+        <div class="cta-process">
+          <span class="cta-step">💬 문의</span>
+          <span class="cta-arrow">→</span>
+          <span class="cta-step">📋 구성 상담</span>
+          <span class="cta-arrow">→</span>
+          <span class="cta-step">📝 계약</span>
+          <span class="cta-arrow">→</span>
+          <span class="cta-step">🚀 설치·운영</span>
+        </div>
+        <div class="cta-contact">
+          <div class="cta-contact-main">
+            <span>📞 <strong>070-0749-0105</strong></span>
+            <span>📧 <strong>info@sjgod.kr</strong></span>
+            <span>🛒 <a href="https://q-shop.kr/" target="_blank"><strong>q-shop.kr</strong></a></span>
+            <span>🌐 <a href="https://www.sjgod.kr" target="_blank"><strong>sjgod.kr</strong></a></span>
+          </div>
+        </div>
+        <div class="cta-buttons">
+          <a href="quote.html" class="cta-btn primary" target="_blank">📄 자동 견적서 발급</a>
+          <button class="cta-btn primary" type="button" onclick="window.print()">🖨 PDF / 인쇄 출력하기</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="pf">
+  <div class="pf-info"><strong>사자가온다(주)</strong>&nbsp;|&nbsp;본사: 경기도 성남시 수정구 금토로80번길 56 위든타워 201호&nbsp;|&nbsp;지점: 서울특별시 광진구 광나루로19길 23 가온누리1 203호&nbsp;|&nbsp;www.sjgod.kr</div>
+  <div class="pf-right"><span class="pf-brand">DREAM TELLER 제안서</span><span class="pf-pg">P 05</span></div>
+</div>
+</div>
+
+</body></html>
