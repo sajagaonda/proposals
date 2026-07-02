@@ -29,10 +29,10 @@ body{font-family:'Pretendard','Pretendard Variable','Apple SD Gothic Neo','Malgu
 
 /* COVER */
 .cover{background:linear-gradient(140deg,#06102e 0%,#1a3af5 52%,#14307E 100%);min-height:210mm;display:flex;flex-direction:column;}
-.cover-body{display:flex;flex:1;}
-.cover-left{flex:.85;padding:26px 12px 18px 36px;display:flex;flex-direction:column;justify-content:center;}
-.cover-right{flex:1.15;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px 18px 16px 0;gap:9px;}
-.cover-logo{width:360px;mix-blend-mode:screen;filter:drop-shadow(0 4px 18px rgba(0,0,0,.5));margin-bottom:18px;}
+.cover-body{display:flex;flex:1;position:relative;overflow:hidden;}
+.cover-left{flex:1;max-width:50%;position:relative;z-index:3;padding:26px 12px 18px 36px;display:flex;flex-direction:column;justify-content:center;}
+.cover-photo{position:absolute;inset:0;z-index:1;}.cover-photo picture{position:absolute;inset:0;display:block;}.cover-photo .cphoto{width:100%;height:100%;object-fit:cover;object-position:90% center;display:block;}.cover-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#06102e 0%,#06102e 12%,rgba(8,18,80,.95) 30%,rgba(18,40,200,.30) 54%,rgba(18,40,200,0) 80%);}
+.cover-logo{width:360px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));margin-bottom:18px;}
 .recv{display:inline-flex;align-items:center;gap:11px;background:#fff;border-radius:12px;padding:9px 15px;align-self:flex-start;margin-bottom:20px;box-shadow:0 6px 20px rgba(0,0,0,.28);max-width:368px;}.recv-logo{max-height:34px;max-width:88px;width:auto;height:auto;object-fit:contain;display:block;flex:none;}.recv-name{color:#0d1a5e;font-size:13px;font-weight:700;letter-spacing:-0.3px;line-height:1.35;}.recv-name b{color:#1a3af5;font-weight:900;}.co-sub{font-size:43px;font-weight:900;color:rgba(255,255,255,.97);margin-bottom:16px;letter-spacing:-0.5px;line-height:1.15;}
 .co-desc{font-size:13px;line-height:1.9;color:rgba(255,255,255,.82);max-width:305px;margin-bottom:18px;}
 .co-desc strong{color:var(--goldlight);}
@@ -367,7 +367,7 @@ img{background:var(--sky2);}
     padding:40px 22px 14px;
     text-align:center;align-items:center;
   }
-  .cover-right{flex:none;padding:6px 22px 28px;}
+  .cover-photo{position:static;width:100%;padding:6px 16px 26px;}.cover-photo picture{position:static;display:block;width:100%;}.cover-photo .cphoto{height:auto;border-radius:14px;box-shadow:0 8px 22px rgba(0,0,0,.4);}.cover-photo::after{display:none;}.cover-left{max-width:100%;}
   .cover-logo{width:78%;max-width:280px;margin:0 auto 16px;}
   .co-sub{font-size:40px;margin-bottom:14px;}
   .co-desc{font-size:13px;line-height:1.85;max-width:100%;margin:0 auto 16px;}
@@ -523,11 +523,11 @@ img{background:var(--sky2);}
         <div class="co-pill">🤝 기업 CSR·진로행사</div>
       </div>
     </div>
-    <div class="cover-right">
-      <div class="cover-stack">
-        <img loading="lazy" decoding="async"class="cs1" src="images/cover1.jpg" alt="드림텔러 현장1">
-        <img loading="lazy" decoding="async"class="cs2" src="images/cover2.jpg" alt="드림텔러 현장2">
-      </div>
+    <div class="cover-photo">
+      <picture>
+        <source media="(max-width:768px)" srcset="images/cover_team_mobile.jpg">
+        <img loading="lazy" decoding="async" class="cphoto" src="images/cover_team.jpg" alt="드림텔러 미래명함 체험 - 학생 3명이 AI 미래명함을 들고 있는 모습">
+      </picture>
     </div>
   </div>
   <div class="cover-bottom">
