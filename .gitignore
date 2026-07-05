@@ -12,3 +12,6 @@ dreamteller/images/dtlogo_solid.thinbak.png
 dreamteller/images/dtlogo_w.png
 dreamteller/images/dtlogo_w.webp
 dreamteller/images/opt_thick_*.png
+
+# scratch preview files
+dreamteller/_*.html
