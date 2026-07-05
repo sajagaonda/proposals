@@ -1,1 +1,14 @@
 .DS_Store
+
+# scratch renders, logo experiments, backups (not for deploy)
+**/_*.png
+**/crop_*.png
+dreamteller/dreamteller_logo_new*.png
+dreamteller/index.html.*
+dreamteller/images/cover1.webp
+dreamteller/images/cover2.webp
+dreamteller/images/dreamteller_logo_lossless.webp
+dreamteller/images/dtlogo_solid.thinbak.png
+dreamteller/images/dtlogo_w.png
+dreamteller/images/dtlogo_w.webp
+dreamteller/images/opt_thick_*.png

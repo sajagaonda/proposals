@@ -31,7 +31,7 @@ body{font-family:"Noto Sans KR",sans-serif;background:#c0cae0;color:var(--dark);
 .cover-body{display:flex;flex:1;position:relative;overflow:hidden;}
 .cover-left{flex:1;max-width:50%;position:relative;z-index:3;padding:26px 12px 18px 36px;display:flex;flex-direction:column;justify-content:center;}
 .cover-photo{position:absolute;inset:0;z-index:1;}.cover-photo picture{position:absolute;inset:0;display:block;}.cover-photo .cphoto{width:100%;height:100%;object-fit:cover;object-position:90% center;display:block;}.cover-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#06102e 0%,#06102e 12%,rgba(8,18,80,.95) 30%,rgba(18,40,200,.30) 54%,rgba(18,40,200,0) 80%);}
-.cover-logo{width:360px;filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));margin-bottom:18px;}
+.cover-logo{width:360px;height:auto;background:transparent;filter:drop-shadow(0 6px 20px rgba(0,0,0,.45));margin-bottom:18px;}
 .co-sub{font-size:19px;font-weight:900;color:rgba(255,255,255,.95);margin-bottom:12px;}
 .co-desc{font-size:13px;line-height:1.9;color:rgba(255,255,255,.82);max-width:305px;margin-bottom:18px;}
 .co-desc strong{color:var(--goldlight);}
@@ -55,6 +55,21 @@ body{font-family:"Noto Sans KR",sans-serif;background:#c0cae0;color:var(--dark);
 .ph-section{font-size:9.5px;font-weight:700;color:var(--accent);letter-spacing:.1em;text-transform:uppercase;}
 .ph-title{font-size:20px;font-weight:900;color:var(--navy);line-height:1.15;}
 .ph-title em{font-style:normal;color:var(--brand);}
+/* SPEC ROW + CASE PANEL */
+.spec-row{display:flex;gap:16px;align-items:stretch;}
+.spec-row .stbl{flex:0 0 60%;}
+.case-panel{flex:1;min-width:0;display:flex;flex-direction:column;border:1.5px solid var(--border);border-radius:11px;background:var(--sky2);padding:9px 11px 11px;}
+.cp-title{font-size:11px;font-weight:800;color:var(--brand);letter-spacing:.01em;margin-bottom:4px;}
+.cp-imgs{position:relative;flex:1;min-height:170px;}
+.cp-imgs picture{position:absolute;border:3px solid #fff;border-radius:5px;box-shadow:0 5px 15px rgba(0,0,0,.24);overflow:hidden;line-height:0;background:#fff;}
+.cp-imgs picture img{display:block;width:auto;}
+.cp-imgs picture:nth-child(1){top:0;left:50%;transform:translateX(-50%) rotate(-1deg);z-index:1;}
+.cp-imgs picture:nth-child(1) img{height:150px;}
+.cp-imgs picture:nth-child(2){bottom:2%;left:1%;transform:rotate(-4deg);z-index:3;}
+.cp-imgs picture:nth-child(2) img{height:116px;}
+.cp-imgs picture:nth-child(3){bottom:0;right:1%;transform:rotate(4deg);z-index:2;}
+.cp-imgs picture:nth-child(3) img{height:116px;}
+.prob-main{display:flex;gap:14px;align-items:flex-start;}.prob-left{flex:1;min-width:0;display:flex;flex-direction:column;gap:7px;justify-content:space-between;}.ph-demo{display:flex;gap:9px;flex:none;}.ph-demo figure{margin:0;display:flex;flex-direction:column;align-items:center;position:relative;}.ph-demo .gifwrap{position:relative;display:flex;}.ph-demo img{height:300px;width:auto;border-radius:10px;border:1.5px solid var(--border);box-shadow:0 4px 12px rgba(13,26,94,.22);display:block;background:#0d1a5e;}.ph-demo figcaption{font-size:10px;font-weight:800;color:var(--accent);margin-top:5px;letter-spacing:.02em;white-space:nowrap;}.ph-demo .dt-badge{position:absolute;top:6px;left:6px;z-index:2;background:rgba(13,26,94,.85);color:#fff;font-size:9px;font-weight:800;padding:2px 6px;border-radius:5px;letter-spacing:.04em;}
 
 /* FOOTER */
 .pf{background:var(--navy);padding:6px 24px;display:flex;align-items:center;justify-content:space-between;flex-shrink:0;}
@@ -96,11 +111,12 @@ body{font-family:"Noto Sans KR",sans-serif;background:#c0cae0;color:var(--dark);
 .intro-cell-img{display:flex;align-items:center;justify-content:center;height:140px;overflow:visible;background:transparent;}
 .intro-cell-img img{max-width:100%;max-height:140px;object-fit:contain;background:transparent;}
 .intro-cell-img.docs{position:relative;width:100%;}
-.intro-cell-img.docs img{position:absolute;height:108px;max-height:108px;width:auto;box-shadow:0 4px 12px rgba(0,0,0,.35);border-radius:3px;top:50%;}
-.intro-cell-img.docs img:nth-child(1){left:6%;transform:translateY(-50%) rotate(-7deg);z-index:1;}
-.intro-cell-img.docs img:nth-child(2){left:29%;transform:translateY(-50%) rotate(-2deg);z-index:2;}
-.intro-cell-img.docs img:nth-child(3){left:52%;transform:translateY(-50%) rotate(2deg);z-index:3;}
-.intro-cell-img.docs img:nth-child(4){left:75%;transform:translateY(-50%) rotate(7deg);z-index:4;}
+.intro-cell-img.docs picture{position:absolute;top:50%;}
+.intro-cell-img.docs picture img{height:108px;max-height:108px;width:auto;box-shadow:0 4px 12px rgba(0,0,0,.35);border-radius:3px;display:block;}
+.intro-cell-img.docs picture:nth-child(1){left:6%;transform:translateY(-50%) rotate(-7deg);z-index:1;}
+.intro-cell-img.docs picture:nth-child(2){left:29%;transform:translateY(-50%) rotate(-2deg);z-index:2;}
+.intro-cell-img.docs picture:nth-child(3){left:52%;transform:translateY(-50%) rotate(2deg);z-index:3;}
+.intro-cell-img.docs picture:nth-child(4){left:75%;transform:translateY(-50%) rotate(7deg);z-index:4;}
 .intro-cell p{font-size:10.5px;color:rgba(255,255,255,.86);line-height:1.5;margin-top:auto;text-align:center;}
 
 /* PRODUCT (P02) */
@@ -113,6 +129,7 @@ body{font-family:"Noto Sans KR",sans-serif;background:#c0cae0;color:var(--dark);
 .proc-step{display:flex;flex-direction:column;gap:5px;min-width:0;}
 .proc-img{width:100%;height:115px;border-radius:7px;border:1px solid var(--border);overflow:hidden;background:var(--sky2);position:relative;box-shadow:0 2px 8px rgba(26,58,245,.1);}
 .proc-img img{width:100%;height:100%;object-fit:cover;background:transparent;display:block;}
+.proc-out{position:absolute;bottom:0;left:0;right:0;z-index:2;background:linear-gradient(90deg,var(--brand),var(--accent));color:#fff;font-size:10px;font-weight:800;text-align:center;padding:3px 0;letter-spacing:.02em;box-shadow:0 -2px 6px rgba(13,26,94,.3);}
 .proc-num{position:absolute;top:5px;left:5px;background:var(--brand);color:#fff;font-size:10px;font-weight:800;min-width:19px;height:19px;padding:0 5px;border-radius:10px;display:inline-flex;align-items:center;justify-content:center;z-index:1;box-shadow:0 1px 3px rgba(0,0,0,.3);}
 .proc-label{font-size:11px;font-weight:700;color:var(--navy);text-align:center;line-height:1.3;}
 
@@ -157,14 +174,17 @@ body{font-family:"Noto Sans KR",sans-serif;background:#c0cae0;color:var(--dark);
 .opt-title{font-size:14px;font-weight:800;color:var(--navy);margin-bottom:4px;letter-spacing:-.01em;}
 .opt-sub{font-size:11px;color:var(--gray);line-height:1.6;}
 .opt-sub strong{color:var(--brand);font-weight:800;}
-.opt-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
+.opt-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;align-items:stretch;}
 .oc-card{background:var(--white);border:1.5px solid var(--border);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 8px rgba(26,58,245,.05);}
 .oc-img{background:var(--sky2);height:185px;display:flex;align-items:center;justify-content:center;padding:10px;gap:6px;border-bottom:1px solid var(--border);position:relative;}
 .oc-img img{max-height:100%;max-width:100%;width:auto;object-fit:contain;border-radius:5px;box-shadow:0 3px 8px rgba(0,0,0,.14);background:#fff;}
+.oc-img picture{display:flex;align-items:center;justify-content:center;max-width:100%;max-height:100%;}
+.oc-img picture img{max-height:165px;max-width:100%;width:auto;object-fit:contain;display:block;}
 .oc-img.dual{padding:12px;}
-.oc-img.dual img{position:absolute;max-height:165px;max-width:62%;width:auto;}
-.oc-img.dual img:nth-child(1){left:6%;top:50%;transform:translateY(-50%) rotate(-3deg);z-index:1;}
-.oc-img.dual img:nth-child(2){right:6%;top:50%;transform:translateY(-50%) rotate(3deg);z-index:2;}
+.oc-img.dual picture{position:absolute;top:50%;max-width:62%;}
+.oc-img.dual picture img{max-height:165px;max-width:100%;width:auto;}
+.oc-img.dual picture:nth-child(1){left:6%;transform:translateY(-50%) rotate(-3deg);z-index:1;}
+.oc-img.dual picture:nth-child(2){right:6%;transform:translateY(-50%) rotate(3deg);z-index:2;}
 .oc-body{padding:11px 13px;display:flex;flex-direction:column;gap:8px;flex:1;}
 .oc-name{font-size:13px;font-weight:800;color:var(--navy);letter-spacing:-.01em;}
 .oc-desc{font-size:10.5px;color:var(--gray);line-height:1.5;}
@@ -393,12 +413,13 @@ img{background:var(--sky2);}
   .intro-cell-img{height:auto;min-height:130px;}
   .intro-cell-img img{max-height:170px;}
   .intro-cell-img.docs{height:140px;}
-  .intro-cell-img.docs img{height:120px;max-height:120px;}
+  .intro-cell-img.docs picture img{height:120px;max-height:120px;}
   .intro-cell p{font-size:11.5px;}
 
   /* ===== PAIN / USE-CASE CARDS ===== */
   .pg3,.pg4{grid-template-columns:1fr 1fr;gap:8px;}
   .pg6{grid-template-columns:repeat(3,1fr);gap:7px;}
+  .prob-main{flex-direction:column;gap:14px;align-items:stretch;}.prob-left{flex:none;gap:9px;}.ph-demo{justify-content:center;gap:10px;width:100%;flex-wrap:wrap;}.ph-demo img{height:auto;max-height:360px;width:auto;max-width:47%;}.ph-demo figcaption{white-space:normal;text-align:center;}
   .pc{padding:11px 12px;border-radius:9px;}
   .pc p{font-size:12px;line-height:1.6;}
   .pc .who{font-size:12px;}
@@ -447,6 +468,17 @@ img{background:var(--sky2);}
   .sk{min-width:0;font-size:11.5px;}
   .sv{font-size:12.5px;}
 
+  /* ===== SPEC ROW + CASE PANEL (stack) ===== */
+  .spec-row{flex-direction:column;gap:14px;}
+  .spec-row .stbl{flex:none;width:100%;}
+  .case-panel{width:100%;padding:12px 12px 16px;}
+  .cp-title{font-size:12.5px;margin-bottom:6px;}
+  .cp-imgs{min-height:250px;}
+  .cp-imgs picture:nth-child(1) img{height:176px;}
+  .cp-imgs picture:nth-child(2) img{height:138px;}
+  .cp-imgs picture:nth-child(3) img{height:138px;}
+  .oc-img picture img{max-height:185px;}
+
   /* ===== LONG-TERM RENTAL ===== */
   .lt-banner{padding:11px 16px;border-radius:9px;}
   .lt-banner-msg{font-size:12.5px;}
@@ -482,6 +514,7 @@ img{background:var(--sky2);}
   .ph-title{font-size:19px;}
   .pg3,.pg4{grid-template-columns:1fr;}
   .pg6{grid-template-columns:1fr 1fr;}
+  .ph-demo{flex-direction:column;align-items:center;gap:12px;}.ph-demo img{max-width:86%;max-height:340px;}
   .proc9{grid-template-columns:1fr;}
   .proc-img{height:180px;}
   .cb-photo{width:100%;}
@@ -498,7 +531,7 @@ img{background:var(--sky2);}
 <div class="page cover">
   <div class="cover-body">
     <div class="cover-left">
-      <picture><source type="image/webp" srcset="images/dreamteller_logo.webp"><img decoding="async" src="images/dreamteller_logo.png" class="cover-logo" alt="드림텔러 로고" width="1400" height="743"></picture>
+      <picture><source type="image/webp" srcset="images/dtlogo_solid.webp"><img decoding="async" src="images/dtlogo_solid.png" class="cover-logo" alt="드림텔러 로고" width="6123" height="3145" fetchpriority="high"></picture>
       <div class="co-sub">드림텔러 포토부스 제안서</div>
       <div class="co-desc">간단한 질문 응답과 사진 촬영만으로<br><strong>나만의 미래 직업인 명함</strong>을 만들어 보는<br>체험형 AI 진로 콘텐츠입니다.</div>
       <div class="co-pills">
@@ -533,6 +566,8 @@ img{background:var(--sky2);}
         <div class="ph-title">학생(참여자)들의 참여도 높은 <em>획기적인 진로 콘텐츠</em>를 찾고 계신가요?</div>
       </div>
     </div>
+    <div class="prob-main">
+      <div class="prob-left">
     <div class="sdiv t">👩‍🏫 교사 · 교육기관 담당자의 고민</div>
     <div class="pg3">
       <div class="pc"><div class="who">A 선생님</div><p>항상 같은 형식의 진로 프로그램들.. 새로운 콘텐츠가 없을까요?</p></div>
@@ -554,6 +589,12 @@ img{background:var(--sky2);}
       <div class="pc uc"><p>기업 채용설명회<br>·CSR 행사</p></div>
       <div class="pc uc"><p>청소년 수련관<br>·문화센터</p></div>
       <div class="pc uc"><p>대학 입시<br>·진학 박람회</p></div>
+    </div>
+      </div>
+    <div class="ph-demo">
+      <figure><div class="gifwrap"><span class="dt-badge">▶ 실제 이용</span><img loading="lazy" decoding="async" src="images/demo_use.gif" alt="드림텔러 실제 이용 장면"></div><figcaption>실제 이용 모습</figcaption></figure>
+      <figure><div class="gifwrap"><span class="dt-badge">▶ 키오스크</span><img loading="lazy" decoding="async" src="images/demo_kiosk.gif" alt="드림텔러 키오스크 부스"></div><figcaption>키오스크 부스</figcaption></figure>
+    </div>
     </div>
     <div class="intro-box">
       <div class="intro-head">
@@ -614,7 +655,7 @@ img{background:var(--sky2);}
       <div class="proc-step"><div class="proc-img"><span class="proc-num">7</span><picture><source type="image/webp" srcset="images/step7.webp"><img loading="lazy" decoding="async" src="images/step7.jpg" alt="직업선택" width="600" height="375"></picture></div><div class="proc-label">직업 선택</div></div>
       <div class="proc-step"><div class="proc-img"><span class="proc-num">8</span><picture><source type="image/webp" srcset="images/step8.webp"><img loading="lazy" decoding="async" src="images/step8.jpg" alt="직업정보" width="600" height="375"></picture></div><div class="proc-label">직업 정보</div></div>
       <div class="proc-step"><div class="proc-img"><span class="proc-num">9</span><picture><source type="image/webp" srcset="images/step9.webp"><img loading="lazy" decoding="async" src="images/step9.png" alt="얼굴촬영" width="600" height="375"></picture></div><div class="proc-label">얼굴 촬영</div></div>
-      <div class="proc-step"><div class="proc-img"><span class="proc-num">10</span><picture><source type="image/webp" srcset="images/step10.webp"><img loading="lazy" decoding="async" src="images/step10.png" alt="사진출력" width="600" height="375"></picture></div><div class="proc-label">사진 출력</div></div>
+      <div class="proc-step"><div class="proc-img"><span class="proc-num">10</span><picture><source type="image/webp" srcset="images/output_real.webp"><img loading="lazy" decoding="async" src="images/output_real.jpg" alt="미래명함 출력 결과물" width="1800" height="1100"></picture><span class="proc-out">바로 결과물 출력</span></div><div class="proc-label">사진 출력</div></div>
     </div>
     <div class="sdiv t mobile-only">드림텔러의 특징</div>
     <div class="pts-grid">
@@ -666,14 +707,24 @@ img{background:var(--sky2);}
         <div class="ph-title"><em>드림텔러</em> 베이직 사양·비용 (VAT 포함)</div>
       </div>
     </div>
-    <div class="stbl">
-      <div class="th">📋 기기 기본 사양 및 렌탈 조건</div>
-      <div class="sr"><span class="sk">기기 사이즈</span><span class="sv">(가로) 400 × (깊이) 400 × (높이) 1,500mm</span></div>
-      <div class="sr"><span class="sk">운영 기준</span><span class="sv">1일 기준 · 오전 10시 설치 ~ 오후 6시 철거</span></div>
-      <div class="sr"><span class="sk">1일 렌탈비</span><span class="sv"><strong>935,000원</strong> (부가세 포함)</span></div>
-      <div class="sr"><span class="sk">왕복 배송료</span><span class="sv">서울·인천 11만원 / 경기 16.5만원 / 그 외 지역 22만원</span></div>
-      <div class="sr"><span class="sk">설치/철거비</span><span class="sv"><span class="free">✅ 무료</span></span></div>
-      <div class="sr"><span class="sk">소프트웨어</span><span class="sv">커스텀 불가 · 기본 세팅 기준</span></div>
+    <div class="spec-row">
+      <div class="stbl">
+        <div class="th">📋 기기 기본 사양 및 렌탈 조건</div>
+        <div class="sr"><span class="sk">기기 사이즈</span><span class="sv">(가로) 400 × (깊이) 400 × (높이) 1,500mm</span></div>
+        <div class="sr"><span class="sk">운영 기준</span><span class="sv">1일 기준 · 오전 10시 설치 ~ 오후 6시 철거</span></div>
+        <div class="sr"><span class="sk">1일 렌탈비</span><span class="sv"><strong>935,000원</strong> (부가세 포함)</span></div>
+        <div class="sr"><span class="sk">왕복 배송료</span><span class="sv">서울·인천 11만원 / 경기 16.5만원 / 그 외 지역 22만원</span></div>
+        <div class="sr"><span class="sk">설치/철거비</span><span class="sv"><span class="free">✅ 무료</span></span></div>
+        <div class="sr"><span class="sk">소프트웨어</span><span class="sv">커스텀 불가 · 기본 세팅 기준</span></div>
+      </div>
+      <div class="case-panel">
+        <div class="cp-title">📸 2026년 7월 3일 · 위례한빛중학교 운영 사례</div>
+        <div class="cp-imgs">
+          <picture><source type="image/webp" srcset="images/case_wirye1.webp"><img loading="lazy" decoding="async" src="images/case_wirye1.jpg" alt="위례한빛중 사례1" width="700" height="649"></picture>
+          <picture><source type="image/webp" srcset="images/case_wirye2.webp"><img loading="lazy" decoding="async" src="images/case_wirye2.jpg" alt="위례한빛중 사례2" width="700" height="482"></picture>
+          <picture><source type="image/webp" srcset="images/case_wirye3.webp"><img loading="lazy" decoding="async" src="images/case_wirye3.jpg" alt="위례한빛중 사례3" width="700" height="593"></picture>
+        </div>
+      </div>
     </div>
     <div class="opt-header">
       <div class="opt-title">🎨 기관 행사·브랜드에 맞춘 선택형 커스텀 옵션</div>
