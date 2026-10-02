@@ -365,6 +365,18 @@ const OPTIONS = [
     {v:0,      label:'없음',      desc:'무료',      pdfLabel:null},
     {v:55000,  label:'1면당',     desc:'55,000원',  pdfLabel:'부스 랩핑 (1면)'},
     {v:247500, label:'전체 랩핑', desc:'247,500원', pdfLabel:'부스 랩핑 (전체)'}
+  ]},
+
+    
+  {key:'staff', group:'👤 상주 인력 추가', choices:[
+    {v:0,      label:'추가 안 함', desc:'선택 안 함', pdfLabel:null},
+    {v:220000, label:'상주 인력 추가', desc:'220,000원 (VAT 포함)', pdfLabel:'상주 인력 추가'}
+  ]},
+
+ 
+  {key:'internet', group:'🌐 인터넷 비용 추가', choices:[
+    {v:0,     label:'추가 안 함', desc:'선택 안 함', pdfLabel:null},
+    {v:55000, label:'인터넷 추가', desc:'55,000원 (VAT 포함)', pdfLabel:'인터넷 비용 추가'}
   ]}
 ];
 
@@ -433,7 +445,11 @@ function readState(){
     maint:  num('maint', 0),
     ui:     num('ui'),
     q:      num('q'),
-    wrap:   num('wrap')
+    wrap:   num('wrap'),
+
+    staff:    num('staff'),
+    internet: num('internet')
+
   };
 }
 
