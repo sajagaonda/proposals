@@ -351,32 +351,32 @@ const MAINT_MONTHLY = 462000;
 
 /* All custom options share the same shape: 3 choices each, first is free */
 const OPTIONS = [
-  {key:'ui',   group:'🎨 UI 디자인 변경', choices:[
+  {key:'ui', group:'🎨 UI 디자인 변경', choices:[
     {v:0,     label:'기본 디자인', desc:'무료',     pdfLabel:null},
-    {v:11000, label:'로고 추가',   desc:'11,000원', pdfLabel:'UI 로고 추가'},
-    {v:55000, label:'맞춤 디자인', desc:'55,000원', pdfLabel:'UI 맞춤 디자인'}
+    {v:11000, label:'로고 추가',   desc:'11,000원', pdfLabel:'UI 로고 추가', unit:'1식'},
+    {v:55000, label:'맞춤 디자인', desc:'55,000원', pdfLabel:'UI 맞춤 디자인', unit:'1식'}
   ]},
+
   {key:'q', group:'💬 질문 변경 / 추가', choices:[
     {v:0,     label:'기본 질문 9개', desc:'무료',        pdfLabel:null},
-    {v:5500,  label:'텍스트 수정',   desc:'5,500원',     pdfLabel:'질문 텍스트 수정'},
-    {v:11000, label:'질문 추가',     desc:'11,000원/개', pdfLabel:'질문 추가'}
+    {v:5500,  label:'텍스트 수정',   desc:'5,500원',     pdfLabel:'질문 텍스트 수정', unit:'1식'},
+    {v:11000, label:'질문 추가',     desc:'11,000원/개', pdfLabel:'질문 추가', unit:'1개'}
   ]},
+
   {key:'wrap', group:'📦 부스 랩핑', choices:[
     {v:0,      label:'없음',      desc:'무료',      pdfLabel:null},
-    {v:55000,  label:'1면당',     desc:'55,000원',  pdfLabel:'부스 랩핑 (1면)'},
-    {v:247500, label:'전체 랩핑', desc:'247,500원', pdfLabel:'부스 랩핑 (전체)'}
+    {v:55000,  label:'1면당',     desc:'55,000원',  pdfLabel:'부스 랩핑 (1면)', unit:'1면'},
+    {v:247500, label:'전체 랩핑', desc:'247,500원', pdfLabel:'부스 랩핑 (전체)', unit:'1식'}
   ]},
 
-    
   {key:'staff', group:'👤 상주 인력 추가', choices:[
     {v:0,      label:'추가 안 함', desc:'선택 안 함', pdfLabel:null},
-    {v:220000, label:'상주 인력 추가', desc:'220,000원 (VAT 포함)', pdfLabel:'상주 인력 추가'}
+    {v:220000, label:'상주 인력 추가', desc:'220,000원 (VAT 포함)', pdfLabel:'상주 인력 추가', unit:'1인'}
   ]},
 
- 
   {key:'internet', group:'🌐 인터넷 비용 추가', choices:[
     {v:0,     label:'추가 안 함', desc:'선택 안 함', pdfLabel:null},
-    {v:55000, label:'인터넷 추가', desc:'55,000원 (VAT 포함)', pdfLabel:'인터넷 비용 추가'}
+    {v:55000, label:'인터넷 추가', desc:'55,000원 (VAT 포함)', pdfLabel:'인터넷 비용 추가', unit:'1대'}
   ]}
 ];
 
@@ -487,21 +487,25 @@ function calc(s){
     amount: ship.price * s.qty
   });
 
-  // 커스텀 옵션 (선택된 것만)
-  let secShown = false;
-  for(const opt of OPTIONS){
-    const v = s[opt.key];
-    if(!v) continue;
-    const c = opt.choices.find(x => x.v === v);
-    lines.push({
-      section: secShown ? null : '커스텀 옵션',
-      label: c.pdfLabel,
-      sub: s.qty>1 ? `${won(v)}원 × ${s.qty}대` : null,
-      qty:`${s.qty}대`,
-      amount: v * s.qty
-    });
-    secShown = true;
-  }
+// 커스텀 옵션 (선택된 것만)
+let secShown = false;
+
+for(const opt of OPTIONS){
+  const v = s[opt.key];
+  if(!v) continue;
+
+  const c = opt.choices.find(x => x.v === v);
+
+  lines.push({
+    section: secShown ? null : '커스텀 옵션',
+    label: c.pdfLabel,
+    sub: null,
+    qty: c.unit || '1식',
+    amount: v
+  });
+
+  secShown = true;
+}
 
   const total = lines.reduce((sum, l) => sum + l.amount, 0);
   return {plan, lines, total};
